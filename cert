@@ -1,0 +1,6 @@
+openssl genrsa -des3 -out server.pem 1024
+openssl rsa -in server.pem -out server.key
+openssl req -new -key server.pem -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+cat server.crt > server.cat
+cat server.pem >> server.cat

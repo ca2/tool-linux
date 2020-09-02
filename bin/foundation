@@ -1,0 +1,11 @@
+#!/bin/bash
+function open_workspace
+{
+
+   cd /ubuntu/platform/seed/metaseed
+
+   xdg-open foundation.workspace &>/dev/null
+
+}
+
+open_workspace

@@ -1,0 +1,101 @@
+#!/bin/bash
+
+datetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+build=`wget -q -O - https://api.ca2.cc/store/ubuntu_build?$datetime`
+
+baseurl="https://timeserver.ca2.cc/ubuntu/$build"
+
+appdir="$HOME/application"
+
+mkdir -p "$appdir"
+
+log="$appdir/install_log_$datetime.txt"
+
+cd "$appdir"
+
+oneliner='one-liner-$build.sh'
+
+curl -q "https://timeserver.ca2.cc/ubuntu/$build/one-liner.sh" --output "$oneliner"
+
+"$oneliner" > "$log"
+
+curl -s "https://api.ca2.cc/store/ubuntu_ls?build=$build&non-recursive=1" --output md5.
+   
+
+function install_main_matter()
+{
+
+   local dir=$HOME/.config/ca2/appmatter/app/appmatter/main
+
+   mkdir -p $dir
+
+   cd $dir
+
+   curl -s https://compressed-matterserver.ca2.cc/app/appmatter/main.zip --output main.zip
+
+   unzip -q -o main.zip
+
+}
+
+function install_store_matter()
+{
+
+   local dir=$HOME/.config/ca2/appmatter/app-core/appmatter/store
+
+   mkdir -p $dir
+
+   cd $dir
+
+   curl -s https://compressed-matterserver.ca2.cc/app-core/appmatter/store.zip --output store.zip
+
+   unzip -q -o store.zip
+
+}
+
+function install_store_item()
+{
+
+   mkdir -p "$appdir"
+
+   cd "$appdir"
+
+   curl -s --compressed "$baseurl/$1" --output $1
+
+   
+
+}
+
+
+function install_store_app()
+{
+
+ 
+   #echo "this is the build $build"
+
+   install_store_item "libaqua.so"
+   install_store_item "libaura.so"
+   install_store_item "app_core_store"
+
+   if md5sum --status --ignore-missing -c md5.md5; then
+      #echo
+      #echo "Download Succeeded!!"
+      #echo
+      cd ~/application/time/x64/basis
+      chmod a+x app_core_store
+      nohup ./app_core_store &
+   else
+      #echo
+      echo "Download Failed : One or more files corrupted"
+      #echo
+   fi
+
+
+}
+
+
+install_main_matter
+install_store_matter
+install_store_app
+
+

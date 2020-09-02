@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+
+sudo /usr/bin/vmware-toolbox-cmd disk shrink /
+sudo /usr/bin/vmware-toolbox-cmd disk shrink /xcore
+
+
+
+
+
+

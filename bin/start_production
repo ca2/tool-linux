@@ -1,0 +1,22 @@
+#!/bin/bash
+
+PATH="/archive/tool/bin:$PATH"
+
+
+export TIME_NAME="time"
+
+
+# "strategic micro update"
+svn update /archive/*
+
+
+
+sleep 1s
+
+
+watch_build &
+
+
+
+
+

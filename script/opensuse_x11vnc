@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+/usr/bin/x11vnc -wait 50 -forever -bg -rfbport 5900 -noxdamage -shared -rfbauth /home/camilo/.vnc/passwd -o /home/camilo/.vnc/x11vnc.log

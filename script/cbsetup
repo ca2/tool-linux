@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+
+function start_codeblocks_app_simple()
+{
+
+	cd ~/__archive/basis/app-simple/appseed/drawing
+	
+	if [ ! -f "./simple_drawing.layout" ]; then
+	
+		wget -O "./simple_drawing.layout" http://ca2.cc/code/script/ubuntu/app-simple/drawing/simple_drawing_layout
+	
+	fi
+
+	cd ~/__archive/basis/platform/seed/metaseed
+	
+	if [ ! -f "./simple.workspace.layout" ]; then
+	
+		wget -O "./simple.workspace.layout" http://ca2.cc/code/script/ubuntu/metaseed/simple_workspace_layout
+	
+	fi
+	
+	codeblocks simple.workspace
+
+}
+
+
+
+
+
+if [ ! -f "$HOME/.config/codeblocks/default.conf" ]; then
+
+mkdir -p "$HOME/.config/codeblocks" 
+
+wget -O "$HOME/.config/codeblocks/default.conf" http://ca2.cc/code/script/ubuntu/codeblocks/default?home=$HOME
+
+fi
+
+
+
+
+
+
+
+start_codeblocks_app_simple
+
+

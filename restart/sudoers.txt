@@ -1,0 +1,9 @@
+sudo visudo
+
+
+
+
+#end of file
+Cmnd_Alias DERRICKCMD=/sbin/restart-hyperv, /sbin/restart-macos, /sbin/restart-ubuntu, /sbin/restart-windows, /sbin/restart-windows8
+camilo ALL=NOPASSWD: DERRICKCMD
+

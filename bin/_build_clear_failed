@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+. _build_common
+
+buildfailedfile="$logfolder/build_failed.txt"
+
+printf "" > "$buildfailedfile"
+
+buildfailedtime=""
+
+buildfailedtimefile="$logfolder/build_failed_time.txt"
+
+printf "$buildfailedtime" > "$buildfailedtimefile"
+
+buildfailedstatusfile="$logfolder/build_failed_status.txt"
+
+buildfailedstatus=""
+
+printf "$buildfailedstatus" > "$buildfailedstatusfile"
+
+
+

@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+
+build=$(<"/build/build/releasedatetime.txt")
+
+buildfolder="/xcore"
+
+distro=$(<"/archive/distro.txt")
+
+name=$(<"/archive/name.txt")
+
+export TIME_NAME="time/$build"
+
+export DISPLAY=":0"
+
+resultfolder="/build"
+
+mailfolder="$resultfolder/time/$build/mail"
+
+storefolder="$resultfolder/store/$build"
+
+mkdir -p "$mailfolder"
+
+endl=$'\n'
+
+logfolder="$resultfolder/time/$build/build_log"
+
+log="$logfolder/build.log"
+
+mkdir -p "$logfolder"
+
+touch "$log"
+
+
+
+

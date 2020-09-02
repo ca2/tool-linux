@@ -1,0 +1,15 @@
+svn switch https://repos.ca2.cc/app/stage app
+svn switch https://repos.ca2.cc/app-cidadedecuritiba/stage app-cidadedecuritiba
+svn switch https://repos.ca2.cc/app-core/stage app-core
+svn switch https://repos.ca2.cc/app-veriwell/stage app-veriwell
+svn switch https://repos.ca2.cc/ca2/stage ca2
+svn switch https://repos.ca2.cc/design/stage design
+svn switch https://repos.ca2.cc/game/stage game
+svn switch https://repos.ca2.cc/include/stage include
+svn switch https://repos.ca2.cc/platform-linux/stage platform-linux
+svn switch https://repos.ca2.cc/third/stage third
+
+
+svn update /xcore/*
+
+

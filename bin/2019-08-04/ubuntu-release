@@ -1,0 +1,26 @@
+#!/bin/bash
+
+dos2unix -q /archive/tool/bin/store-for-linux
+
+dos2unix -q /archive/tool/bin/linux-one-liner
+
+build=`date +"%Y-%m-%d-%H-%M-%S"`
+
+echo "$build" > /node/public/build.txt
+
+basedir="/node/public/store/$build"
+
+mkdir -p "$basedir"
+
+mkdir -p "$basedir/metastage"
+
+cp -Rf /xcore/time/x64/basis/* "$basedir/"
+
+cp -Rf /xcore/app/stage/metastage/* "$basedir/metastage/"
+
+cd "$basedir"
+
+find . -maxdepth 1 -type f -name "*" -exec objcopy --strip-debug {} \;
+
+cp /bergedge/hi5/linux/bin/store-for-ubuntu "$basedir/store-for-ubuntu.sh"
+cp /bergedge/hi5/linux/bin/ubuntu-one-liner "$basedir/one-liner.sh"

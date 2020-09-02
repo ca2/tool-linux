@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ -f /build/build/build.txt ]; then
+
+	build_all
+
+fi
+
+
+if [ -f /build/build/build_and_close.txt ]; then
+
+	build_all
+
+fi
+
+if [ -f /share/ubuntufix1.txt ]; then
+
+rm /share/ubuntufix1.txt
+
+sleep 2
+
+xdotool mousemove 963 487
+
+sleep 1
+
+xdotool click 1
+
+fi
+
+
+

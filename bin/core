@@ -1,0 +1,11 @@
+#!/bin/bash
+function open_workspace
+{
+
+   cd /xcore/platform/seed/metaseed
+
+   xdg-open core_solutions.workspace &>/dev/null
+
+}
+
+open_workspace

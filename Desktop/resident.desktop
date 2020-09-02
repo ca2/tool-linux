@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=resident
+GenericName=resident
+Comment=resident
+Exec=/xcore/time/x64/basis/app : app=app-core/resident build_number=basis locale=_std schema=_std
+Icon=/xcore/app-core/appmatter/resident/_std/_std/main/icon.png
+Terminal=false
+X-MultipleArgs=false
+Categories=Utilities;
+StartupNotify=true
+MimeType=

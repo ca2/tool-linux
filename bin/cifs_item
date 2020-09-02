@@ -1,0 +1,19 @@
+#!/bin/bash
+
+distro=`cat "/archive/distro.txt"`
+
+if [ "$distro" == "ubuntu" ]; then
+
+sudo apt install cifs-utils
+
+fi
+
+mkdir -p /mnt/$1
+
+unlink /$1
+
+echo "//10.0.0.101/$1 /mnt/$1 cifs 
+credentials=/sensitive/sensitive/samba.txt,uid=1000,gid=1000,iocharset=utf8 0 0" >> /etc/fstab
+
+
+

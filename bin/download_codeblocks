@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+function download_codeblocks()
+{
+
+	cd ~/Downloads
+	wget http://sourceforge.net/projects/codeblocks/files/Binaries/17.12/Linux/Debian%20stable/codeblocks_17.12-1_amd64_stable.tar.xz
+
+	tar -xf codeblocks_17.12-1_amd64_stable.tar.xz
+
+}
+
+download_codeblocks

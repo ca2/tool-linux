@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SmartSVN
+Comment=syntevo Subversion Client
+Exec=/opt/smartsvn/bin/smartsvn.sh
+Icon=smartsvn
+Terminal=false
+X-MultipleArgs=false
+Categories=Development;
+StartupNotify=true
+

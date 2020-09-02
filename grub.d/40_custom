@@ -1,0 +1,57 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+
+menuentry 'Windows 10' --class windows --class os $menuentry_id_option 'osprober-efi-6422-CD49' {
+	insmod part_gpt
+	insmod fat
+	set root='hd2,gpt2'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd2,gpt2 --hint-efi=hd2,gpt2 --hint-baremetal=ahci2,gpt2  6422-CD49
+	else
+	  search --no-floppy --fs-uuid --set=root 6422-CD49
+	fi
+	chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+}
+set timeout_style=menu
+if [ "${timeout}" = 0 ]; then
+  set timeout=10
+fi
+
+
+menuentry 'Hyper-V' --class windows --class os $menuentry_id_option 'osprober-efi-F224-EA30' {
+	insmod part_gpt
+	insmod fat
+	set root='hd0,gpt1'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  F224-EA30
+	else
+	  search --no-floppy --fs-uuid --set=root F224-EA30
+	fi
+	chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+}
+set timeout_style=menu
+if [ "${timeout}" = 0 ]; then
+  set timeout=10
+fi
+
+
+menuentry "macOS Sierra" {
+	insmod part_gpt
+	insmod hfsplus
+	set root='hd1,gpt1'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd1,gpt1 --hint-efi=hd1,gpt1 --hint-baremetal=ahci1,gpt1  67E3-17ED
+	else
+	  search --no-floppy --fs-uuid --set=root 67E3-17ED
+	fi
+	chainloader /EFI/BOOT/BOOTX64.efi
+}
+set timeout_style=menu
+if [ "${timeout}" = 0 ]; then
+  set timeout=10
+fi
+

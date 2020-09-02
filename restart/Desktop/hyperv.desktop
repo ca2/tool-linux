@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Hyper-V
+Comment=Hyper-V Desktop
+Exec=sudo /sbin/restart-hyperv
+Icon=/bergedge/hi5/icon/general/hyperv.png
+Terminal=false
+Categories=IDE;
+

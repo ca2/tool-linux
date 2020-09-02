@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+
+
+mkdir -p ~/.config/ca2/appmatter/app/appmatter > /dev/null 2>&1
+mkdir -p ~/.config/ca2/appmatter/app-cidadedecuritiba/appmatter > /dev/null 2>&1
+mkdir -p ~/.config/ca2/appmatter/app-core/appmatter > /dev/null 2>&1
+mkdir -p ~/.config/ca2/appmatter/app-simple/appmatter > /dev/null 2>&1
+mkdir -p ~/.config/ca2/appmatter/app-veriwell/appmatter > /dev/null 2>&1
+mkdir -p ~/.config/ca2/appmatter/design/appmatter > /dev/null 2>&1
+mkdir -p ~/.config/ca2/appmatter/game/appmatter > /dev/null 2>&1
+
+
+rsync -r -u $HOME/__archive/basis/app/appmatter/* ~/.config/ca2/appmatter/app/appmatter/ > /dev/null 2>&1
+rsync -r -u $HOME/__archive/basis/app-cidadedecuritiba/appmatter/* ~/.config/ca2/appmatter/app-cidadedecuritiba/appmatter/ > /dev/null 2>&1
+rsync -r -u $HOME/__archive/basis/app-core/appmatter/* ~/.config/ca2/appmatter/app-core/appmatter/ > /dev/null 2>&1
+rsync -r -u $HOME/__archive/basis/app-simple/appmatter/* ~/.config/ca2/appmatter/app-simple/appmatter/ > /dev/null 2>&1
+rsync -r -u $HOME/__archive/basis/app-veriwell/appmatter/* ~/.config/ca2/appmatter/app-veriwell/appmatter/ > /dev/null 2>&1
+rsync -r -u $HOME/__archive/basis/design/appmatter/* ~/.config/ca2/appmatter/design/appmatter/ > /dev/null 2>&1
+rsync -r -u $HOME/__archive/basis/game/appmatter/* ~/.config/ca2/appmatter/game/appmatter/ > /dev/null 2>&1
+
+
+
+
+

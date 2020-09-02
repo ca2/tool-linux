@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export DISPLAY=":0"
+
+distro=`cat "/archive/distro.txt"`
+
+if [ "$distro" == "opensuse" ]; then
+
+   konsole -e /archive/tool/bin/_build_all
+
+else
+
+   gnome-terminal --window-with-profile=buildall -- /archive/tool/bin/_build_all
+
+fi
+
+
+

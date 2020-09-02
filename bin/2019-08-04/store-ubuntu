@@ -1,0 +1,16 @@
+#!/bin/bash
+
+dos2unix /bergedge/hi5/linux/store-for-ubuntu
+dos2unix /bergedge/hi5/linux/ubuntu-one-liner
+
+build=`date +"%Y-%m-%d-%H-%M-%S"`
+
+echo "$build" > /node/public/build.txt
+
+basedir="/node/public/store/$build"
+
+mkdir -p "$basedir"
+
+cp -Rf /xcore/time/x64/basis/* "$basedir/"
+
+cp /bergedge/hi5/linux/ubuntu-one-liner "$basedir/one-liner.sh"

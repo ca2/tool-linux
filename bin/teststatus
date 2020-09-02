@@ -1,0 +1,18 @@
+#!/bin/bash
+
+teststatus () {
+
+    build="***build***"
+
+    name=***`cat "/archive/name.txt"`***
+
+    post_status stage@ca2.cc "[$build] 🥁 $name Status Test..."
+
+
+
+}
+
+teststatus
+
+
+

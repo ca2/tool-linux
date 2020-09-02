@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+mkdir -p $__application/app > /dev/null 2>&1
+mkdir -p $__application/app-cidadedecuritiba > /dev/null 2>&1
+mkdir -p $__application/app-core > /dev/null 2>&1
+mkdir -p $__application/third > /dev/null 2>&1
+mkdir -p $__application/app-veriwell > /dev/null 2>&1
+mkdir -p $__application/app-simple > /dev/null 2>&1
+
+unlink $__application/app/appseed
+unlink $__application/app-cidadedecuritiba/appseed
+unlink $__application/app-core/appseed
+unlink $__application/app-simple/appseed
+unlink $__application/app-veriwell/appseed
+unlink $__application/platform-linux
+unlink $__application/third/appseed
+
+ln -s $__basis/app/appseed $__application/app/appseed
+ln -s $__basis/app-cidadedecuritiba/appseed $__application/app-cidadedecuritiba/appseed
+ln -s $__basis/app-core/appseed $__application/app-core/appseed
+ln -s $__basis/app-simple/appseed $__application/app-simple/appseed
+ln -s $__basis/app-veriwell/appseed $__application/app-veriwell/appseed
+ln -s $__basis/platform-linux $__application/platform-linux
+ln -s $__basis/third/appseed $__application/third/appseed
+
+
+mkdir -p $__application/time-linux/x64/basis > /dev/null 2>&1
+mkdir -p $__application/platform-linux > /dev/null 2>&1
+rsync -r -u $__basis/time-linux/x64/basis/* $__application/time-linux/x64/basis/ > /dev/null 2>&1
+rsync -r -u $__basis/platform-linux/* $__application/platform-linux/ > /dev/null 2>&1
+
+
+copyall-matter
+
+
+
+
+

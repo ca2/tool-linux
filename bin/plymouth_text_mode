@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+﻿plymouth-set-default-theme text
+
+
+
+
+

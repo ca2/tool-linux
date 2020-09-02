@@ -1,0 +1,4 @@
+
+
+journalctl --vacuum-size=200M
+journalctl --verify

@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+
+build_clean() {
+
+   . _build_common
+
+   cd "$buildfolder"
+
+   echo "rm -Rf \"$buildfolder/x64\"" | tee -a $log
+
+   rm -Rf "$buildfolder/x64"
+
+   echo "rm -Rf \"$buildfolder/intermediate\"" | tee -a $log
+
+   rm -Rf "$buildfolder/intermediate"
+
+   echo "rm -Rf \"$buildfolder/intermediate*\"" | tee -a $log
+
+   rm -Rf "$buildfolder/intermediate*"
+
+   echo "rm -Rf \"$buildfolder/time\"" | tee -a $log
+
+   rm -Rf "$buildfolder/time"
+
+   echo "rm -Rf \"$buildfolder/time*\"" | tee -a $log
+
+   rm -Rf "$buildfolder/time*"
+
+   echo "find \"$buildfolder/\" -name *.gch -delete" | tee -a $log
+
+   find "$buildfolder/" -name *.gch -delete
+
+}
+
+
+build_clean

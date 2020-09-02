@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Ubuntu
+Comment=Ubuntu Desktop
+Exec=sudo /sbin/restart-ubuntu
+Icon=/bergedge/hi5/icon/general/ubuntu.png
+Terminal=false
+Categories=IDE;
+

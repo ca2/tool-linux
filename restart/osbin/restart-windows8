@@ -1,0 +1,3 @@
+cp /mnt/boot/grub/grub-windows8.cfg /mnt/boot/grub/grub.cfg
+sleep 5
+reboot

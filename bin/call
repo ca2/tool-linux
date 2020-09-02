@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function commit_all()
+{
+
+cd $1
+
+svn commit app
+svn commit app-ca2
+svn commit app-cidadedecuritiba
+svn commit app-core
+svn commit app-veriwell
+svn commit ca2
+svn commit design
+svn commit game
+svn commit include
+svn commit nodeapp
+svn commit third
+
+}
+
+dir=$(pwd)
+
+commit_all $dir

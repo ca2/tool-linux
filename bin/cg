@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+function run
+{
+
+   cd $1
+
+   rm -Rf oprofile_data
+   rm -Rf callgrind.out.*
+
+#  valgrind  --tool=callgrind -v --collect-systime=yes ./app : app=$2
+#  valgrind  --tool=callgrind -v ./app : app=$2
+  valgrind  --tool=callgrind -v --dump-every-bb=10000000 ./app : app=$2
+#   valgrind  --tool=callgrind -v --collect-systime=yes --dump-every-bb=10000000 ./app : app=$2
+
+
+   #valgrind  --tool=callgrind -v --toggle-collect=callgrind_profile_this --dump-every-bb=10000000 ./app : app=$2
+#   valgrind  --tool=callgrind -v --collect-atstart=no --toggle-collect=callgrind_profile_this ./app : app=$2
+
+   
+
+}
+
+dir=$(pwd)
+
+run $dir $1

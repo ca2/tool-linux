@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+
+. _build_common
+
+echo "Build \"$build\" FAILED..."  2>&1 | tee -a $log
+
+buildfailedfile="$logfolder/build_failed.txt"
+
+printf "$build" > "$buildfailedfile"
+
+buildfailedtime=`date +"%Y-%m-%d %H:%M:%S"`
+
+buildfailedtimefile="$logfolder/build_failed_time.txt"
+
+printf "$buildfailedtime" > "$buildfailedtimefile"
+
+buildfailedstatusfile="$logfolder/build_failed_status.txt"
+
+if [ -z "$buildfailedstatus" ]; then
+
+   buildfailedstatus="Build Failed"
+
+fi
+
+printf "$buildfailedstatus" > "$buildfailedstatusfile"
+
+echo 2>&1 | tee -a $log
+
+echo 2>&1 | tee -a $log
+
+export failedmail="$mailfolder/build_failed.txt"
+
+touch "$failedmail"
+
+echo "Subject: [$name][$build] Build Failed!!😡" >> "$failedmail"
+echo "From: production@ca2.email" >> "$failedmail"
+echo "Content-Type: text/plain; charset=\"utf8\"" >> "$failedmail"
+echo >> "$failedmail"
+echo "😡[$name][$build] Build Failed!!" >> "$failedmail"
+echo >> "$failedmail"
+echo >> "$failedmail"
+echo "Build Log: $log" >> "$failedmail"
+echo >> "$failedmail"
+echo >> "$failedmail"
+cat "$log" >> "$failedmail"
+
+ssmtp production_failed@ca2.email < "$failedmail"
+
+post_status stage@ca2.cc "[$build] 😡 $name Build Failed!!"

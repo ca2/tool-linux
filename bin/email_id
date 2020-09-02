@@ -1,0 +1,1 @@
+mysql --defaults-extra-file="/sensitive/sensitive/public_mysql/account_query.cnf" -N -se "SELECT id FROM fun_user WHERE email='$1';"

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+datetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+build=`wget -q -O - http://api.ca2.cc/store/ubuntu_build?$datetime`
+
+baseurl="http://timeserver.ca2.cc/ubuntu/$build"
+
+appdir="$HOME/application"
+
+mkdir -p "$appdir"
+
+cd "$appdir"
+
+script="one-liner-$build.sh"
+
+curl -s "$baseurl/one-liner.sh" --output $script
+
+chmod a+x $script
+
+logdir="$appdir/log" 
+
+mkdir -p "$logdir"
+
+logpath="$logdir/install-log-$datetime.txt"
+
+./$script >> "$logpath" 2>&1
+
+
+   
