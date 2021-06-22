@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo dnf install zlib-devel
+
+sudo dnf install kf5-knotifications-devel
+sudo dnf install extra-cmake-modules
