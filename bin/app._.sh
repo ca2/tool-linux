@@ -18,7 +18,7 @@ buildapp() {
 
    g++ -D_APP_ID=\"$_APP_ID\" -std=c++17 -fpermissive -fexceptions -fnon-call-exceptions -fno-pie -fno-stack-protector -Wno-pointer-arith -Wno-attributes -Winvalid-pch -Wno-conversion-null -fPIC -g -D_DEBUG -I. -I$PROJECTDIR -I$ARCHIVE -I$CONFIG -I$WORKSPACEDIR/../.. -I$WORKSPACEDIR/../../inc -I$WORKSPACEDIR/../../../source -I$WORKSPACEDIR/../../../source/include -I$WORKSPACEDIR/../../platform-linux -I$WORKSPACEDIR/../../platform-linux/_include -I$WORKSPACEDIR/../../../source/app/_include -I$WORKSPACEDIR/../../../source/app -I$WORKSPACEDIR/../../../source/app/aura -I/sensitive/sensitive/include -c $WORKSPACEDIR/../../platform-linux/app/main.cpp -o $WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/intermediate/$TARGETNAME/$PROJECTNAME/main.cpp.o
    
-   g++ -L$WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/x64/$TARGETNAME -L/usr/lib64/mysql/ -o $WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/x64/$TARGETNAME/$PROJECTNAME $WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/intermediate/$TARGETNAME/$PROJECTNAME/main.cpp.o  -Wl,-rpath=\$ORIGIN -lacme -lapex -Wl,-z,defs -g
+   g++ -L$WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/x64/$TARGETNAME -L/usr/lib64/mysql/ -o $WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/x64/$TARGETNAME/$PROJECTNAME $WORKSPACEDIR/../../../time-$PLATFORM_MODIFIER/intermediate/$TARGETNAME/$PROJECTNAME/main.cpp.o  -Wl,-rpath=$ORIGIN -lacme -lapex -Wl,-z,defs -g
 
 }
 
