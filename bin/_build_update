@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+
+build_update () {
+
+   . _build_common
+
+   # echo "svn revert -R \"$buildfolder\"/* " | tee -a $log
+
+   # svn revert -R "$buildfolder"/* 2>&1 | tee -a $log
+
+   cd "$buildfolder"
+   
+   # for D in *; do
+   # if [ -d "${D}" ]; then
+        
+   #     echo "svn cleanup --remove-unversioned \"${D}\"" | tee -a $log
+
+   #     svn cleanup --remove-unversioned "${D}" 2>&1 | tee -a $log
+
+   # fi
+   # done
+
+   echo "svn update \"$buildfolder\"/* " | tee -a $log
+
+   svn update "$buildfolder"/* 2>&1 | tee -a $log
+
+   echo "svn commit \"$buildfolder\"/* " | tee -a $log
+
+   svn commit -m"<3tbs $distro new build: releasedatetime: $build" "$buildfolder"/* 2>&1 | tee -a $log
+
+}
+
+
+build_update
+

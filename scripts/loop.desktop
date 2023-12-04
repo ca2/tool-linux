@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=loop
+Comment=loop script for build machine
+Type=Application
+Terminal=true
+Exec=$HOME/solution/basis/archive/tool-linux/bin/loop
+Icon=system-run
+X-GNOME-Autostart-enabled=true
+Categories=System;Utility;

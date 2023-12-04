@@ -1,0 +1,2 @@
+sudo cat /bergedge/hi5/a/quasar_v2.txt > /dev/ttyS10
+

@@ -1,0 +1,311 @@
+#!/bin/bash
+
+
+get_full_hostname()
+{
+
+   if [ "$__SYSTEM_DISTRO_FAMILY" = "zypper" ]; then
+
+      FULL_HOSTNAME=$(cat /etc/hostname)
+
+   elif [ "$__SYSTEM_DISTRO" = "fedora" ]; then
+
+      FULL_HOSTNAME=$(hostnamectl --static)
+
+   else
+
+      FULL_HOSTNAME=$(hostname -f)
+
+   fi
+
+}
+
+
+zypper_install_code()
+{
+
+cd $HOME
+	
+	cd Downloads
+
+   if [ ! -d "zypper_install_code" ]; then
+
+      mkdir zypper_install_code
+
+      cd zypper_install_code
+
+      sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+   
+      sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/zypp/repos.d/vscode.repo'
+
+      sudo zypper refresh
+
+      sudo zypper --non-interactive install code
+
+   fi
+
+
+}
+
+
+debian_install_code()
+{
+
+ 	cd $HOME
+	
+	cd Downloads
+
+   if [ ! -d "debian_install_code" ]; then
+
+      mkdir debian_install_code
+
+      cd debian_install_code
+
+      wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+
+      sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
+      
+      sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+
+      sudo apt -y install apt-transport-https
+      
+      sudo apt update
+      
+      sudo apt -y install code
+
+   fi
+
+}
+
+
+rpm_install_code()
+{
+
+ 	cd $HOME
+	
+	cd Downloads
+
+   if [ ! -d "rpm_install_code" ]; then
+
+      mkdir rpm_install_code
+
+      cd rpm_install_code
+
+      sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+      sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
+      sudo dnf check-update
+
+      sudo dnf -y install code
+
+   fi
+
+}
+
+
+install_code()
+{
+
+   if [ "$__SYSTEM_DISTRO_FAMILY" = "zypper" ]; then
+
+      zypper_install_code
+
+   elif [ "$__SYSTEM_DISTRO_FAMILY" = "debian" ]; then
+
+      debian_install_code
+
+   elif [ "$__SYSTEM_DISTRO" = "fedora" ]; then
+
+      rpm_install_code
+
+   else
+
+      __SYSTEM_SUDO_INSTALL code
+
+   fi
+
+}
+
+
+install_smartgit()
+{
+
+   cd $HOME
+
+   cd Downloads
+
+   wget https://www.syntevo.com/downloads/smartgit/smartgit-linux-21_2_2.tar.gz
+
+   sudo tar -xzvf smartgit-linux-21_2_1.tar.gz -C /opt/
+
+   /opt/smartgit/bin/add-menuitem.sh
+
+   if [ "$DESKTOP_ENVIRONMENT" = "gnome"]; then
+
+      sudo sed -i "/^\(Icon=\).*/ s//\1smartgit.png/" $HOME/.local/share/applications/syntevo-smartgit.desktop
+
+   fi
+
+   /opt/smartgit/bin/smartgit.sh &
+
+}
+
+
+install_jetbrains_toolbox()
+{
+
+   cd $HOME
+
+   cd Downloads
+
+   wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.23.11731.tar.gz
+   
+   sudo mkdir /opt/jetbrains-toolbox/
+
+   sudo tar -xzvf jetbrains-toolbox-*.tar.gz -C /opt/jetbrains-toolbox/
+
+   cd /opt/jetbrains-toolbox
+   
+   cd jetbrains-toolbox-*
+
+   ./jetbrains-toolbox &
+
+}
+
+
+clone_default_design_repositories()
+{
+
+   get_full_hostname
+
+   GITHUB_ID=$(cat $HOME/github_id.txt)
+   GITHUB_ID=($echo $GITHUB_ID)
+
+   cd $HOME
+
+   cd .config
+
+   if [ ! -d "ca2" ]; then
+   
+      mkdir ca2
+
+   fi
+
+   cd ca2
+
+   if [ ! -d "audio" ]; then
+
+      git clone https://github.com/$GITHUB_ID/user_audio audio
+   
+   fi
+   
+   if [ ! -d "config" ]; then
+   
+      git clone https://github.com/$GITHUB_ID/user_config config
+      
+   fi
+   
+   if [ ! -d "localconfig" ]; then
+   
+      git clone https://github.com/$GITHUB_ID/user_config_$FULL_HOSTNAME localconfig
+
+   fi
+
+   if [ ! -d "matter" ]; then
+
+      git clone https://github.com/ca2/matter
+
+   fi
+
+   cd $HOME
+
+   if [ ! -d "sensitive" ]; then
+
+      mkdir sensitive
+
+   fi
+
+   cd sensitive
+
+   if [ ! -d "sensitive" ]; then
+   
+      git clone https://github.com/ca2/sensitive
+
+   fi
+
+}
+
+
+samba_cloud_storage()
+{
+
+
+   cd $HOME
+
+   if [ ! -d "/a" ]; then
+
+      sudo mkdir "/a"
+
+   fi
+
+   sudo bash -c "grep -qF \"//eko.camilothomas.com/a /a\" /etc/fstab || echo \"//eko.camilothomas.com/a /a cifs credentials=/home/$USER/sensitive/sensitive/samba/.cloud_storage,iocharset=utf8,uid=1000,dir_mode=0775,file_mode=0664 0 0\" >> /etc/fstab"
+
+   sudo mount /storage_cloud
+
+   if [ -L "/dropbox" ]; then
+
+      LINK=$(readlink /dropbox)
+
+      if [ ! "$LINK" = "/a/Dropbox" ]; then
+
+         sudo unlink /dropbox
+
+         sudo ln -s /a/Dropbox /dropbox
+
+      fi
+
+   else
+
+      sudo ln -s /a/Dropbox /dropbox
+
+   fi
+
+}
+
+
+. _distro__desktop_environment_and_release
+
+
+echo "__SYSTEM_DISTRO is $__SYSTEM_DISTRO"
+echo "__SYSTEM_DISTRO_FAMILY is $__SYSTEM_DISTRO_FAMILY"
+echo "__SYSTEM_DESKTOP_ENVIRONMENT is $__SYSTEM_ESKTOP_ENVIRONMENT"
+echo "__SYSTEM_DISTRO_RELEASE is $__SYSTEM_DISTRO_RELEASE"
+echo "__SYSTEM_SUDO_INSTALL is $__SYSTEM_SUDO_INSTALL"
+
+if [ ! -d "/opt/smartgit" ]; then
+
+	install_smartgit
+	
+fi
+
+if [ ! -d "/opt/jetbrains-toolbox" ]; then
+
+	install_jetbrains_toolbox
+	
+fi
+
+install_code
+
+clone_default_design_repositories
+
+if [ ! -L "/dropbox" ]; then
+
+   samba_cloud_storage
+
+fi
+
+$HOME/.config/ca2/config/prepare_linux_design
+
+
+

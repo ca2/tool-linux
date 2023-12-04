@@ -1,0 +1,121 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+
+build_ok () {
+
+   . _build_common
+
+   echo "Post build actions \"$1\"" 2>&1 | tee -a $log
+
+   echo 2>&1 | tee -a $log
+
+   echo 2>&1 | tee -a $log
+
+   echo "stripdebugsymbols \"$buildfolder/$TIME_NAME/x64/stage\"" 2>&1 | tee -a $log
+
+   stripdebugsymbols "$buildfolder/$TIME_NAME/x64/stage"
+
+   echo 2>&1 | tee -a $log
+
+   echo 2>&1 | tee -a $log
+
+   echo "dos2unix -q /archive/tool/bin/store-for-$distro" 2>&1 | tee -a $log
+
+   dos2unix -q /archive/tool/bin/store-for-$distro
+
+   echo "dos2unix -q /archive/tool/bin/linux-one-liner" 2>&1 | tee -a $log
+
+   dos2unix -q /archive/tool/bin/linux-one-liner
+
+   echo 2>&1 | tee -a $log
+
+   echo 2>&1 | tee -a $log
+
+   echo "mkdir -p \"$storefolder\"" 2>&1 | tee -a $log
+
+   mkdir -p "$storefolder"
+
+   echo "cp -Rf \"$buildfolder/$TIME_NAME/x64/stage\"/* \"$storefolder/\"" 2>&1 | tee -a $log
+
+   cp -Rf "$buildfolder/$TIME_NAME/x64/stage"/* "$storefolder/"
+
+   echo "mkdir -p \"$storefolder/metastage\"" 2>&1 | tee -a $log
+
+   mkdir -p "$storefolder/metastage"
+
+   echo "cp -Rf \"$buildfolder/app/stage/metastage\"/* \"$storefolder/metastage/\"" 2>&1 | tee -a $log
+
+   cp -Rf "$buildfolder/app/stage/metastage"/* "$storefolder/metastage/"
+
+   echo "cp /archive/tool/bin/store-for-$distro \"$storefolder/store-for-$distro.sh\"" 2>&1 | tee -a $log
+
+   cp /archive/tool/bin/store-for-$distro "$storefolder/store-for-$distro.sh"
+
+   echo "cp /archive/tool/bin/one-liner-for-$distro \"$storefolder/one-liner.sh\"" 2>&1 | tee -a $log
+
+   cp /archive/tool/bin/one-liner-for-$distro "$storefolder/one-liner.sh"
+
+   printf "$build" > "$resultfolder/store/build.txt"
+
+   buildoktime=`date +"%Y-%m-%d %H:%M:%S"`
+
+   buildoktimefile="$logfolder/build_ok_time.txt"
+
+   printf "$buildoktime" > "$buildoktimefile"
+
+   echo "." 2>&1 | tee -a $log
+
+   echo "." 2>&1 | tee -a $log
+
+   sleep 3s
+
+   echo "." 2>&1 | tee -a $log
+
+   echo "." 2>&1 | tee -a $log
+
+   sleep 3s
+
+   echo "--" 2>&1 | tee -a $log
+
+   echo "--" 2>&1 | tee -a $log
+
+   sleep 3s
+
+   echo "--" 2>&1 | tee -a $log
+
+   echo "--" 2>&1 | tee -a $log
+
+   successmail="$mailfolder/build_success.txt"
+
+   touch "$successmail"
+
+   echo "Subject: [$name][$build] Build Succeeded!!😀" >> "$successmail"
+   echo "From: production@ca2.email" >> "$successmail"
+   echo "Content-Type: text/plain; charset=\"utf8\"" >> "$successmail"
+   echo >> "$successmail"
+   echo "😀[$name][$build] Build Succeeded!!" >> "$successmail"
+   echo >> "$successmail"
+   echo >> "$successmail"
+   echo "Build Log: $log" >> "$successmail"
+
+   echo "Sending success mail..." 2>&1 | tee -a $log
+
+   ssmtp production_success@ca2.email < "$successmail"
+
+   echo "Posting success status..." 2>&1 | tee -a $log
+   
+   post_status stage@ca2.cc "[$build] 😀 $name Build Succeeded!!"
+
+   echo "Build $build succeeded!!" 2>&1 | tee -a $log
+
+
+}
+
+build_ok "$0"
+
+
+

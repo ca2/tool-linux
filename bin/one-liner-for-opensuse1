@@ -1,0 +1,138 @@
+#!/bin/bash
+
+distro=`cat "$HOME/application/distro.txt"`
+
+datetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+build=`wget -q -O - "http://api.ca2.cc/store/linux_build?distro=$distro&$datetime"`
+
+baseurl="http://timeserver.ca2.cc/$distro/$build"
+
+appdir="$HOME/application/app-core/store/x64/"
+
+mkdir -p "$appdir"
+
+cd "$appdir"
+
+curl -s "http://api.ca2.cc/store/linux_ls?distro=$distro&build=$build&non-recursive=1" --output md5.md5
+   
+
+function install_main_matter()
+{
+
+   local dir=$HOME/.config/ca2/appmatter/app/appmatter/main
+
+   mkdir -p $dir
+
+   cd $dir
+
+   curl -s http://compressed-matterserver.ca2.cc/app/appmatter/main.zip --output main.zip
+
+   unzip -q -o main.zip
+
+}
+
+
+function install_store_matter()
+{
+
+   local dir=$HOME/.config/ca2/appmatter/app-core/appmatter/store
+
+   mkdir -p $dir
+
+   cd $dir
+
+   curl -s http://compressed-matterserver.ca2.cc/app-core/appmatter/store.zip --output store.zip
+
+   unzip -q -o store.zip
+
+}
+
+
+function install_store_item()
+{
+
+   cd "$appdir"
+
+   curl -s --compressed "$baseurl/$1" --output $1
+
+}
+
+
+function defer_add_library()
+{
+
+   library=$1
+
+   package=$2
+
+   if [ -z "$package" ]; then
+
+      package=$library
+
+   fi
+
+   library_installed=`ldconfig -p | grep $library`
+
+   if [ -z "$library_installed" ]; then
+
+      export install=$install" $package"
+
+   fi
+
+}
+
+
+function install_store_app()
+{
+
+   mkdir -p "$appdir"
+
+   #echo "this is the build $build"
+
+   install_store_item "libaqua.so"
+   install_store_item "libatomiconv.so"
+   install_store_item "libaura.so"
+   install_store_item "libaurasn.so"
+   install_store_item "libaxis.so"
+   install_store_item "libbase.so"
+   install_store_item "libcore.so"
+   install_store_item "libdraw2d_cairo.so"
+   install_store_item "libexperience_tranquillum.so"
+   install_store_item "liblibrary.so"
+   install_store_item "libapp_core_store.so"
+   install_store_item "app_core_store"
+
+   if md5sum --status --ignore-missing -c md5.md5; then
+      #echo
+      #echo "Download Succeeded!!"
+      #echo
+
+      export install=""
+
+      defer_add_library "freeimage" 
+
+      if [ ! -z $install ]; then
+
+         sudo zipper -y install$install
+
+      fi
+
+      cd "$appdir"
+      chmod a+x app_core_store
+      nohup ./app_core_store &
+   else
+      #echo
+      echo "Download Failed : One or more files corrupted"
+      #echo
+   fi
+
+
+}
+
+
+install_main_matter
+install_store_matter
+install_store_app
+
+

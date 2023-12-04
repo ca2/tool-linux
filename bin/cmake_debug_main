@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+cmake_debug_main()
+{
+
+	
+	cmake -S $HOME/cmake/main -B $HOME/cmake/main/cmake-build-debug
+	
+
+}
+
+
+cmake_debug_main
+
+
+

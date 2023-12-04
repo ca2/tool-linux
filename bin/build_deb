@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+application_build_helper --build-deb
+
+
+

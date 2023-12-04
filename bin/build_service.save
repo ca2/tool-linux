@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+sleep 10s
+
+
+gnome-terminal -- /bin/bash -c build_service_loop
+
+
+
+
+
+

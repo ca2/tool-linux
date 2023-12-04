@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+sudo pacman -S freeimage freetype2 extra-cmake-modules kf5
+

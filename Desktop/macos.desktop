@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Mac OS
+Comment=Mac OS Desktop
+Exec=sudo /sbin/restart-macos
+Icon=/bergedge/hi5/icon/general/apple.png
+Terminal=false
+Categories=IDE;
+

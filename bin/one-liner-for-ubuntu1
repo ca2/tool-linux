@@ -1,0 +1,168 @@
+#!/bin/bash
+
+distro=`cat "$HOME/application/distro.txt"`
+
+datetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+build=`wget -q -O - "http://api.ca2.cc/store/linux_build?distro=$distro&$datetime"`
+
+baseurl="http://timeserver.ca2.cc/$distro/$build"
+
+appdir="$HOME/application/app-core/store/x64/"
+
+mkdir -p "$appdir"
+
+cd "$appdir"
+
+curl -s "http://api.ca2.cc/store/linux_ls?distro=$distro&build=$build&non-recursive=1" --output md5.md5
+   
+
+function install_matter()
+{
+
+   matter=$1
+
+   title=$(basename $matter)
+
+   local dir=$HOME/.config/ca2/appmatter/$matter
+
+   mkdir -p $dir
+
+   cd $dir
+
+   hashprefix=`wget -q -O - "http://compressed-matterserver.ca2.cc/$matter.zip.md5"`
+
+   if [ -z $hash ]
+
+      error=1
+
+      echo "No check available for $title.zip"
+
+   else
+
+      curl -s http://compressed-matterserver.ca2.cc/$matter.zip --output $title.zip
+
+      hash=`md5sum -b < $title.zip`
+
+      if [[ $hash == $hashprefix* ]];
+
+         unzip -q -o $title.zip
+
+         error=0
+
+      else
+
+         echo "$title.zip check failed"
+
+      fi
+
+   fi
+
+}
+
+
+function install_store_item()
+{
+
+   cd "$appdir"
+
+   curl -s --compressed "$baseurl/$1" --output $1
+
+}
+
+
+function defer_add_library()
+{
+
+   library=$1
+
+   package=$2
+
+   if [ -z "$package" ]; then
+
+      package=$library
+
+   fi
+
+   library_installed=`ldconfig -p | grep $library`
+
+   if [ -z "$library_installed" ]; then
+
+      export install=$install" $package"
+
+   fi
+
+}
+
+
+function install_store_app()
+{
+
+   mkdir -p "$appdir"
+
+   #echo "this is the build $build"
+
+   install_store_item "libaqua.so"
+   install_store_item "libatomiconv.so"
+   install_store_item "libaura.so"
+   install_store_item "libaurasn.so"
+   install_store_item "libaxis.so"
+   install_store_item "libbase.so"
+   install_store_item "libcore.so"
+   install_store_item "libdraw2d_cairo.so"
+   install_store_item "libexperience_tranquillum.so"
+   install_store_item "liblibrary.so"
+   install_store_item "libapp_core_store.so"
+   install_store_item "app_core_store"
+
+   if md5sum --status --ignore-missing -c md5.md5; then
+      #echo
+      #echo "Download Succeeded!!"
+      #echo
+
+      export install=""
+
+      defer_add_library "libfreeimage" "libfreeimage3"
+
+      if [ ! -z $install ]; then
+
+         sudo apt -y install$install
+
+      fi
+
+      cd "$appdir"
+      chmod a+x app_core_store
+      nohup ./app_core_store &
+   else
+      #echo
+      echo "Download Failed : One or more files corrupted"
+      #echo
+   fi
+
+
+}
+
+
+install_matter app/appmatter/main
+
+if [ $error -ne 0 ]; then
+
+   echo "Couldn't run store (1)"
+
+   exit 1
+
+fi
+
+install_matter app-core/appmatter/store
+
+if [ $error -ne 0 ]; then
+
+   echo "Couldn't run store (1)"
+
+   exit 1
+
+fi
+
+install_store_app
+
+

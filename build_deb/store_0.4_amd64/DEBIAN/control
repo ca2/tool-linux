@@ -1,0 +1,9 @@
+Package: store
+Version: 0.4
+Architecture: amd64
+Depends: libfreeimage3, libstartup-notification0, libunac1
+Maintainer: Camilo Sasuke Thomas Borregaard Sørensen <camilosasuketbs@gmail.com>
+Description: store
+ ca2 store application.
+
+

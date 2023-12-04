@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=store
+GenericName=store
+Comment=store Comment
+Exec=/opt/store/bin/_app_core_store %U
+Icon=/usr/share/pixmaps/store.png
+Terminal=false
+StartupNotify=true
+X-MultipleArgs=false
+Categories=Network;System;Settings;
+MimeType=text/plain;
+StartupWMClass=app-core.store
+

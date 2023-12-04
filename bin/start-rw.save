@@ -1,0 +1,24 @@
+#!/bin/bash
+
+function start_rw()
+{
+
+   cd /core/time/x64/basis
+
+   ./app_core_auraclick  </dev/null &>/dev/null &
+   ./app_core_auratype  </dev/null &>/dev/null &
+   ./app_core_desk  </dev/null &>/dev/null &
+   ./app_core_weather  </dev/null &>/dev/null &
+   ./app_core_clockverse  </dev/null &>/dev/null &
+   ./app_core_todo  </dev/null &>/dev/null &
+   ./app_veriwell_waven  </dev/null &>/dev/null &
+   ./app_core_resident  </dev/null &>/dev/null &
+
+}
+
+
+start_rw
+
+
+
+:q

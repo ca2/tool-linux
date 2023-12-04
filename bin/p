@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+function run
+{
+
+   cd $1
+
+   rm -Rf oprofile_data
+
+#  valgrind  --tool=callgrind -v --collect-systime=yes ./app : app=$2
+#  valgrind  --tool=callgrind -v ./app : app=$2
+   operf -g ./app : app=$2
+
+}
+
+dir=$(pwd)
+
+run $dir $1

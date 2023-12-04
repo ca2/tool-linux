@@ -1,0 +1,94 @@
+#!/bin/bash
+
+
+function start_install
+{
+
+	export distro="fedora"
+
+	export datetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+	export build=`wget -q -O - "http://api.ca2.cc/store/linux_build?distro=$distro&$datetime"`
+
+	export baseurl="http://timeserver.ca2.cc/$distro/$build"
+
+	export appdir="$HOME/application"
+
+	mkdir -p "$appdir"
+
+	echo "$distro" > "$appdir/distro.txt"
+
+	prerequisites
+
+	cd "$appdir"
+
+	export script="one-liner-$build.sh"
+
+	#curl_installed=`which curl`
+
+	#if [ -z "$curl_installed" ]; then
+
+		#sudo apt-get install curl
+
+	#fi
+
+	wget -q -O $script "$baseurl/one-liner.sh"
+
+	chmod a+x "$script"
+
+	logdir="$appdir/log" 
+
+	mkdir -p "$logdir"
+
+	logpath="$logdir/install-log-$datetime.txt"
+
+	. ./$script "$logpath" 2>&1 > "$logpath" 
+
+}
+
+
+function defer_add_library()
+{
+
+	library=$1
+
+	package=$2
+
+	if [ -z "$package" ]; then
+
+		package=$library
+
+	fi
+
+	library_installed=`ldconfig -p | grep $library`
+
+	if [ -z "$library_installed" ]; then
+
+		export install=$install" $package"
+
+	fi
+
+}
+
+
+function prerequisites()
+{
+
+	export install=""
+
+	defer_add_library "libfreeimage" "freeimage"
+	defer_add_library "libappindicator3" "libappindicator-gtk3"
+
+	if [ ! -z "$install" ]; then
+
+		sudo dnf install -y $install
+
+	fi
+
+}
+
+
+start_install
+
+
+   

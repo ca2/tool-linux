@@ -1,0 +1,15 @@
+#!/bin/bash
+
+project_dir=$(pwd)
+
+platform_setup_dir=$project_dir'/../../../inc'
+
+file_path=$platform_setup_dir'/'$1'.txt'
+
+#echo $file_path
+
+if [ ! -f $file_path ]; then
+
+   printf '%s' "$2"
+
+fi

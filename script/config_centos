@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ ! -d "~/__config" ]; then
+
+	mkdir -p "~/__config"
+
+fi
+
+
+if [ ! -f "~/__config/__distro.h" ]; then
+
+	echo "#define CENTOS_LINUX 1" > ~/__config/__distro.h
+	
+fi
+
+if [ ! -f "~/__config/distro.txt" ]; then
+
+	printf %s "centos" > ~/__config/distro.txt
+	
+fi
+
+if [ ! -f "~/__config/name.txt" ]; then
+
+	printf %s "CentOS" > ~/__config/name.txt
+	
+fi
+
+
+
+
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+svn checkout https://repos.ca2.cc/platform-macos/basis /archive/nodeapp-macos
+svn checkout https://repos.ca2.cc/shared/platform /archive/platform_root
+svn checkout https://repos.ca2.cc/shared/platform-macos/basis /operating-system/operating-system-macos
+svn checkout https://repos.ca2.cc/shared/storage-macos /archive/storage
+svn checkout https://repos.ca2.cc/internal/tool-macos /archive/tool

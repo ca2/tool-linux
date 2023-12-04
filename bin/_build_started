@@ -1,0 +1,63 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+#distro=`cat "/archive/distro.txt"`
+distro=`__distro`
+distro_version=`__distro_version`
+desktop_environment=`__desktop_environment`
+
+# Virtual Shared Folders "Warm-Up" (needed?!?!)
+
+sleep 1
+
+cat /share/releasedatetime.txt > /build/build/starting_new_$distro-linux_build1.txt
+
+sleep 1
+
+cat /share/releasedatetime.txt > /build/build/starting_new_$distro-linux_build2.txt
+
+sleep 1
+
+cat /share/releasedatetime.txt > /build/build/starting_new_$distro-linux_build3.txt
+
+sleep 1
+
+# ENDOF Virtual Shared Folders "Warm-Up" (needed?!?!)
+
+cat /share/releasedatetime.txt > /build/build/releasedatetime.txt
+
+cat /share/releasedatetime.txt > /build/build/build_started.txt
+
+. _build_common
+
+echo "[$build] 🥁 $name Build Started!!" | tee -a $log
+
+buildstartedtime=`date +"%Y-%m-%d %H:%M:%S"`
+
+buildstarteddatetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+buildstartedtimefile="$logfolder/build_started_time.txt"
+
+printf "$buildstartedtime" > "$buildstartedtimefile"   
+
+startmail="$mailfolder/build_start.txt"
+
+touch "$startmail"
+
+emailtitle="[$name][$build] Build Start!!"
+
+echo "Subject: $emailtitle🥁" >> "$startmail"
+echo "From: production@ca2.email" >> "$startmail"
+echo "Content-Type: text/plain; charset=\"utf8\"" >> "$startmail"
+echo >> "$startmail"
+echo "🥁$emailtitle" >> "$startmail"
+
+ssmtp production@ca2.email < "$startmail"
+
+post_status stage@ca2.cc "[$build] 🥁 $name Build Started!!"
+
+
+

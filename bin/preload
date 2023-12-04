@@ -1,0 +1,3 @@
+
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libasan.so.5
+export LD_LIBRARY_PATH=.:/xcore/time/x64/basis:

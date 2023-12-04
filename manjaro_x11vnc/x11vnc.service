@@ -1,0 +1,11 @@
+[Unit]
+Description=VNC Server for X11
+Requires=display-manager.service
+After=display-manager.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/x11vnc -nap -wait 50 -noxdamage -rfbauth /home/camilo/.vnc/passwd -forever -o /home/camilo/.vnc/x11vnc.log -bg -auth guess
+Restart=on-failure
+RestartSec=2
+

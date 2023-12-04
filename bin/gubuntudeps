@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+sudo dnf -y install pkgconfig dbus-glib-devel libappindicator-gtk3-devel gtk3-devel zlib-devel libidn-devel ncurses-devel openssl-devel cairo-devel pango-devel xcb-util-image-devel ffmpeg-devel xcb-util-devel xcb-util-wm-devel libxkbcommon-devel libxkbcommon-x11-devel sqlite-devel glew-devel mesa-libOSMesa-devel freeimage-devel mpg123-devel
+sudo dnf -y groupinstall "X Software Development"
+
+
+

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://www.internalpointers.com/post/build-binary-deb-package-practical-guide -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		 
+		<script src="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(4).txt"></script><script src="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(5).txt" id="google_shimpl"></script><script type="text/javascript" async="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/analytics.js"></script><script async="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/js"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-23296419-22');
+		</script>
+		 
+
+		<title>Building binary deb packages: a practical guide  - Internal Pointers</title>
+
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Monocasual Laboratories">
+		<meta name="description" content="How to ship your apps on Debian and derivatives. ">
+		<meta name="keywords" content="C++,CMake">
+		<meta name="copyright" content="2015-2022 Monocasual Laboratories">
+		<meta name="application-name" content="Internal Pointers">
+		<meta name="google-site-verification" content="d6wzhBnnEXNHg7kty5SNXVBKd4e29wUFP69SROd-3eI">
+
+		<meta property="og:title" content="Building binary deb packages: a practical guide ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.internalpointers.com/post/build-binary-deb-package-practical-guide">
+<meta property="og:image" content="https://raw.githubusercontent.com/monocasual/internalpointers-files/master/2020/05/deb/build-binary-deb-package-practical-guide.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="900">
+<meta property="og:site_name" content="Internal Pointers">
+<meta property="og:description" content="How to ship your apps on Debian and derivatives. ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:url" content="https://www.internalpointers.com/post/build-binary-deb-package-practical-guide">
+<meta name="twitter:title" content="Building binary deb packages: a practical guide ">
+<meta name="twitter:description" content="How to ship your apps on Debian and derivatives. ">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/monocasual/internalpointers-files/master/2020/05/deb/build-binary-deb-package-practical-guide.png">
+
+		<link rel="icon" href="https://www.internalpointers.com/img/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" href="https://www.internalpointers.com/img/favicon-152.png">
+		<link rel="stylesheet" href="./Building binary deb packages_ a practical guide - Internal Pointers_files/main-1.4.0.css">
+
+				
+		<script defer="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/jquery.min.js"></script>
+		<script defer="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/js.cookie.min.js"></script>
+		<script defer="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/main-1.4.0.js"></script>
+
+		
+
+	<meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><link rel="preload" href="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(6).txt" as="script"><script type="text/javascript" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(6).txt"></script><link rel="preload" href="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(7).txt" as="script"><script type="text/javascript" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(7).txt"></script></head>
+	<body>
+		<div class="ip-follow-us-popup" style="display: block;">
+
+    <div class="ip-follow-us-popup__side">
+        <img src="./Building binary deb packages_ a practical guide - Internal Pointers_files/facebook-like-thumb.svg" alt="Like it!">
+    </div>
+
+    <div class="ip-follow-us-popup__header">
+        <p>Join us on Facebook!</p>
+    </div>
+
+    <div class="ip-follow-us-popup__body">
+        <div class="ip-follow-us-popup__body__ok">
+        <img src="./Building binary deb packages_ a practical guide - Internal Pointers_files/facebook-like-thumb.svg" alt="Like it!">
+        </div>
+    </div>
+
+    <div class="ip-follow-us-popup__footer">
+        <div><a href="https://www.internalpointers.com/post/build-binary-deb-package-practical-guide#" class="ip-follow-us-popup__footer__nope">Nope, thanks anyway.</a></div>
+    </div>
+
+</div>		<div class="ip-cookie-banner" style="display: block;">
+    <div class="ip-container">
+        <p>We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. By using our site, you acknowledge that you have read and understand our <a href="https://www.internalpointers.com/post/%7B%7B%20url(&#39;/privacy/&#39;)%20%7D%7D">Privacy Policy</a>, and our <a href="https://www.internalpointers.com/post/%7B%7B%20url(&#39;/tos/&#39;)%20%7D%7D">Terms of Service</a>. Your use of this site is subject to these policies and terms. | <a href="https://www.internalpointers.com/post/build-binary-deb-package-practical-guide#" class="ip-cookie-banner__close">ok, got it</a></p>
+    </div>
+</div>		<div class="ip-header">
+	<div class="ip-container">
+		<div class="ip-header__logo">
+			<a href="https://www.internalpointers.com/">**internal / pointers</a>
+		</div>
+		<div class="ip-header__links">
+			<ul>
+				<li><a href="https://www.internalpointers.com/rss">rss</a></li>
+				<li><a href="https://www.internalpointers.com/about">about</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="ip-sub-header">
+</div>
+		<div class="ip-body" style="height: auto !important;">
+
+	<div class="ip-container" style="height: auto !important;">
+
+		<div class="ip-post" style="height: auto !important;">
+
+			<div class="ip-post__info">
+				<p>— Written by Triangles on May 30, 2020 
+								• updated on June 02, 2020  
+								• ID 81 —</p>
+			</div>
+
+			<div class="ip-post__title">
+				<h1>Building binary deb packages: a practical guide </h1>
+			</div>
+
+			<div class="ip-post__intro">
+				<p>How to ship your apps on Debian and derivatives. </p>
+			</div>
+
+			
+			<div class="ip-post__body" style="height: auto !important;">
+				<script async="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(8).txt"></script>
+<!-- internalpointers responsive -->
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-1778432007040046" data-ad-slot="1269254897" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_0_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 280px; width: 1000px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:1000px;height:280px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1000" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/ads.html" data-google-container-id="a!1" data-google-query-id="CPqftIfpx_0CFe2klQIdfw4PpA" data-load-complete="true"></iframe></div></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><p>A <strong>deb</strong> file is an archive that contains data. Marked with the <code>.deb</code> extension, it is used to easily distribute and install programs for Linux Debian and derivatives. Deb files are handy when your app needs to take care of additional dependencies, integrate itself with the desktop, run pre and post install scripts and so on.</p>
+<p>In this quick tutorial I want to show you how to generate a deb package from scratch that will install a <em>binary executable</em> in the target system. Let's start off with a bit of theoretical background.</p>
+<h2>Anatomy of a deb package</h2>
+<p>A deb is a standard Unix <a href="https://en.wikipedia.org/wiki/Ar_%28Unix%29">ar archive</a> that contains your application and other utility files. The most important one is the <strong>control file</strong>, which stores the information about the deb package and the program it installs.</p>
+<p>Internally, a deb package contains a collection of folders that mimics a typical Linux file system, such as <code>/usr</code>, <code>/usr/bin</code>, <code>/opt</code> and so on. A file put in one of those directories will be copied to the same location in the actual file system during installation. So, for example a binary file put into <code>&lt;.deb&gt;/usr/local/bin/binaryfile</code> will be installed to <code>/usr/local/bin/binaryfile</code>.</p>
+<p>On the outside instead, all deb package files follow a specific naming convention:</p>
+<pre><code>&lt;name&gt;_&lt;version&gt;-&lt;revision&gt;_&lt;architecture&gt;.deb
+</code></pre>
+<p>That is:</p>
+<ul>
+<li><code>&lt;name&gt;</code> – the name of your application;</li>
+<li><code>&lt;version&gt;</code> – the version number of your application; </li>
+<li><code>&lt;revision&gt;</code> – the version number of the current deb package;</li>
+<li><code>&lt;architecture&gt;</code> – the hardware architecture your program will be run on.</li>
+</ul>
+<p>For example, suppose you want to release your program called <em>hello</em>, version 1.0, built for 64-bit ARM processors. Your deb file name would look something like <code>hello_1.0-1_arm64.deb</code>.</p>
+<h2>Making the deb package</h2>
+<p>We are now ready to generate the package. Make sure you have the <code>dpkg-deb</code> program installed in your system: this will be used later on to generate the final archive.</p>
+<h3>1. Create the working directory</h3>
+<p>Create a temporary working directory to make your package in. Follow the same naming convention we have seen before. For example:</p>
+<pre><code>mkdir hello_1.0-1_arm64
+</code></pre>
+<h3>2. Create the internal structure</h3>
+<p>Put your program files where they should be installed to on the target system. For example, suppose you want your program to be installed to <code>/usr/local/bin</code>:</p>
+<pre><code>mkdir -p hello_1.0-1_arm64/usr/local/bin
+</code></pre>
+<p>The <code>-p</code> flag to the <code>mkdir</code> command will create nested directories. Then copy the executable file in there:</p>
+<pre><code>cp ~/YourProjects/Hello/hello hello_1.0-1_arm64/usr/local/bin
+</code></pre>
+<h3>3. Create the <code>control</code> file</h3>
+<p>The <code>control</code> file lives inside the <code>DEBIAN</code> directory. Mind the uppercase: a similar directory named <code>debian</code> (lowecase) is used to store source code for the so-called <a href="https://www.debian.org/doc/debian-policy/ch-source.html"><strong>source packages</strong></a>. This tutorial is about binary packages, so we don't need it.</p>
+<p>Let's create the <code>DEBIAN</code> folder first:</p>
+<pre><code>mkdir helloworld_1.0-1_arm64/DEBIAN
+</code></pre>
+<p>And then create the empty <code>control</code> file:</p>
+<pre><code>touch helloworld_1.0-1_arm64/DEBIAN/control
+</code></pre>
+<h3>4. Fill in the <code>control</code> file</h3>
+<p>Open the file previously created with your text editor of choice. The <code>control</code> file is just a list of data fields. For binary packages there is a minimum set of mandatory ones:</p>
+<ul>
+<li><code>Package</code> – the name of your program;</li>
+<li><code>Version</code> – the version of your program;</li>
+<li><code>Architecture</code> – the target architecture;</li>
+<li><code>Maintainer</code> – the name and the email address of the person in charge of the package maintenance;</li>
+<li><code>Description</code> – a brief description of the program.</li>
+</ul>
+<p>For example:</p>
+<pre><code>Package: hello
+Version: 1.0
+Architecture: arm64
+Maintainer: Internal Pointers &lt;info@internalpointers.com&gt;
+Description: A program that greets you.
+ You can add a longer description here. Mind the space at the beginning of this paragraph.
+</code></pre>
+<p>The <code>control</code> file may contain additional useful fields such as the <a href="https://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections"><code>section</code></a> it belongs to or the <a href="https://www.debian.org/doc/debian-policy/ch-relationships.html#s-binarydeps">dependency list</a>. The latter is extremely important in case your program relies on external libraries to work correctly. You can fill it manually if you wish, but there are helper tools to ease the burden. I will show you how in the next few paragraphs.</p>
+<h3>5. Build the deb package</h3>
+<p>This is the last step. Invoke <code>dpkg-deb</code> as following:</p>
+<pre><code>dpkg-deb --build --root-owner-group &lt;package-dir&gt;
+</code></pre>
+<p>So in our example:</p>
+<pre><code>dpkg-deb --build --root-owner-group &lt;helloworld_1.0-1_arm64&gt;
+</code></pre>
+<p>The <code>--root-owner-group</code> flag makes all deb package content owned by the root user, which is the standard way to go. Without such flag, all files and folders would be owned by your user, which might not exist in the system the deb package would be installed to.</p>
+<p>The command above will generate a nice <code>.deb</code> file alongside the working directory or print an error if something is wrong or missing inside the package. If the operation is successful you have a deb package ready for distribution. Keep reading for additional goodies!</p>
+<script async="" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/f(8).txt"></script>
+<!-- internalpointers responsive -->
+<ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-1778432007040046" data-ad-slot="1269254897" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done"><div id="aswift_1_host" style="border: none; height: 280px; width: 1000px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script><h2>Test your deb package</h2>
+<p>It's a good idea to test your deb package once created. You can install it like any other regular deb package:</p>
+<pre><code>sudo dpkg -i &lt;package&gt;
+</code></pre>
+<p>Make sure it can be also uninstalled easily. You can just remove the package:</p>
+<pre><code>sudo dpkg -r &lt;appname&gt;
+</code></pre>
+<p>or remove it along with the configuration files (if any):</p>
+<pre><code>sudo dpkg -P &lt;appname&gt;
+</code></pre>
+<p>Make sure the application has been removed correctly by issuing:</p>
+<pre><code>dpkg -l | grep &lt;appname&gt;
+</code></pre>
+<p>The <code>dpkg -l</code> command lists all the packages installed, while <code>grep</code> searches for <code>&lt;appname&gt;</code>. The output should be blank if the app has been uninstalled correctly.</p>
+<h3>Sometimes the deb installation goes wrong</h3>
+<p>Especially when you are dealing with pre/post install or removal scripts that fail at some point. This is a typical error message by <code>dpkg</code>:</p>
+<blockquote><p>Package is in a very bad inconsistent state - you should reinstall it before attempting a removal.</p>
+</blockquote>
+<p>which prevents any progress. The trick is to move all references to your broken package somewhere safe (e.g. the <code>/tmp</code> directory) and then force remove it, like so:</p>
+<pre><code>sudo mv /var/lib/dpkg/info/&lt;packagename&gt;.* /tmp/
+sudo dpkg --remove --force-remove-reinstreq &lt;packagename&gt;
+</code></pre>
+<h2>Taking care of external dependencies</h2>
+<p>You can generate them automatically with <code>dpkg-shlibdeps</code>. It will parse your binary and look for external symbols. At the time of writing, that tool doesn't seem to work out of the box. For some unknown (to me) reasons it wants the <code>debian/control</code> file to be present in the working directory – that's for source packages, remember?  The workaround here is to create it, then move into the working folder and run:</p>
+<pre><code>dpkg-shlibdeps -O path/to/binary/file
+</code></pre>
+<p>The <code>-O</code> flag will print dependencies on the standard output. Copy the output and paste it in the <code>Depends</code> section of your <code>DEBIAN/control</code> file. You can get rid of the <code>debian/control</code> file once done. I'm pretty sure there are better ways for this, though: I will update the article once I get additional information on this step.</p>
+<h2>Run scripts before or after package installation and removal</h2>
+<p>Four files: <code>postinst</code>, <code>preinst</code>, <code>postrm</code>, and <code>prerm</code> are called <em>maintainer scripts</em>. Such files live inside the <code>DEBIAN</code> directory and, as their names suggest, <code>preinst</code> and <code>postinst</code> are run before and after installation, while <code>prerm</code> and <code>postrm</code> are run before and after removal. They must be marked as executables. Also, remember to set permissions: must be between <code>0555</code> and <code>0775</code>.</p>
+<h2>Sources</h2>
+<p><a href="https://www.debian.org/doc/debian-policy/index.html">Debian Policy Manual</a><br>
+Debian documentation - <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Chapter 7. Basics of the Debian package management system</a><br>
+Unix StackExchange - <a href="https://unix.stackexchange.com/questions/195794/how-to-uninstall-a-deb-installed-with-dpkg">How to uninstall a .deb installed with dpkg?</a></p>
+			</div>
+
+
+			<div class="ip-post__tags">
+								<a class="ip-tag" href="https://www.internalpointers.com/tag/c">C++</a>
+				 • 								<a class="ip-tag" href="https://www.internalpointers.com/tag/cmake">CMake</a>
+											</div>
+
+			<div class="ip-post__neighbor-posts">
+								
+							</div>
+			
+						<div class="ip-post__comments">
+				<div class="ip-post__comments__title">
+					comments
+				</div>
+				
+								<div class="ip-post__comments__list">
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Biff</span> on 
+							<span class="date">June 03, 2020 at 11:01</span>
+						</div> 
+						<div class="body">Hi,<br>
+<br>
+Thanks for the howto. What about digitally signing them? From what I understand, there's no set "Debian-approved" way of doing this.</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Triangles</span> on 
+							<span class="date">June 07, 2020 at 12:16</span>
+						</div> 
+						<div class="body">@Biff good question, I'll put it in my TO-DO list. </div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Michal</span> on 
+							<span class="date">December 02, 2020 at 16:06</span>
+						</div> 
+						<div class="body">great HowTo. thanks for sharing </div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">ofbahar</span> on 
+							<span class="date">April 21, 2021 at 22:11</span>
+						</div> 
+						<div class="body">Thanks for sharing</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">anonamos</span> on 
+							<span class="date">June 09, 2021 at 17:46</span>
+						</div> 
+						<div class="body">dpkg-deb: error: failed to open package info file 'swtor_8.0-1arm64/DEBIAN/control' for reading: No such file or directory</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Mark</span> on 
+							<span class="date">July 15, 2021 at 06:06</span>
+						</div> 
+						<div class="body">Exactly what I was searching for, explained very well. Thanks</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Kbrannen</span> on 
+							<span class="date">September 19, 2021 at 22:03</span>
+						</div> 
+						<div class="body">Please note that as of 20.04 these instructions no longer work because there is no longer a "dpkg-deb" package ... or apt can't find one.</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Triangles</span> on 
+							<span class="date">September 21, 2021 at 09:31</span>
+						</div> 
+						<div class="body">@Kbrannen are you sure? the "dpkg-deb" program should be part of the "dpkg" package: https://packages.ubuntu.com/dpkg</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">GeometryMos</span> on 
+							<span class="date">October 13, 2021 at 01:15</span>
+						</div> 
+						<div class="body">Really straightforward and helpful! Thank you!</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Summer71</span> on 
+							<span class="date">December 05, 2021 at 06:57</span>
+						</div> 
+						<div class="body">For a newbie a clear and simple description. It saves a lot of time. Thanks </div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">koct9i</span> on 
+							<span class="date">December 16, 2021 at 10:41</span>
+						</div> 
+						<div class="body">Please note than dpkg-gencontrol writes names of package files into "debian/files". Parsing it much easier than any dances with resulting files in parent directory (i.e. parsing ../*.changes").</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">jkka</span> on 
+							<span class="date">January 27, 2022 at 22:34</span>
+						</div> 
+						<div class="body">how to make some content in it?</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">Triangles</span> on 
+							<span class="date">February 02, 2022 at 09:33</span>
+						</div> 
+						<div class="body">@jkka you add content by copying stuff to the temporary local folder, as I did with the executable (see "Making the deb package", point .2).</div> 
+					</div>
+										<div class="ip-post__comments__list__comment">
+						<div class="info">
+							<span class="author">phineasphred</span> on 
+							<span class="date">July 31, 2022 at 19:24</span>
+						</div> 
+						<div class="body">Is it possible to double click on a .deb file to unpack it? I'm looking for a way for a customer to install new software remotely. </div> 
+					</div>
+									</div>
+				
+
+				<div class="ip-post__comments__add">
+					<form data-id-post="81">
+						<input type="text" placeholder="Your name" maxlength="255" required="">
+						<textarea placeholder="Your message" maxlength="2000" required=""></textarea>
+						<div class="captcha">
+							<div class="g-recaptcha" data-theme="dark" data-sitekey="6LdAYg4UAAAAAJCfgHOmxqOCywp8yGSg8S_B4TAS"></div>
+						</div>
+						<button>
+							<span class="text">Add your comment!</span>
+							<span class="spinner">Saving...</span>
+						</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="ip-post__social-tools">
+				<div class="ip-post__social-tools__title">
+					share!
+				</div>
+				<div class="ip-post__social-tools__twitter item"></div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+		<div class="ip-footer">
+	<div class="ip-container">
+		© 2015-2022 — Monocasual Laboratories — 
+		<a href="https://www.internalpointers.com/tos" rel="nofollow">terms of service</a> — 
+		<a href="https://www.internalpointers.com/privacy" rel="nofollow">privacy policy</a> — 
+		<a href="https://www.internalpointers.com/about">about</a> — 
+		<a href="https://www.internalpointers.com/rss">RSS feed</a>
+	</div>
+</div>
+	
+
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;" data-ad-status="unfilled"><div id="aswift_2_host" tabindex="0" title="Advertisement" aria-label="Advertisement" style="border: none; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/ads(1).html" data-google-container-id="a!3" data-load-complete="true"></iframe></div></ins><iframe src="./Building binary deb packages_ a practical guide - Internal Pointers_files/aframe.html" width="0" height="0" style="display: none;"></iframe></body><iframe id="google_esf" name="google_esf" src="./Building binary deb packages_ a practical guide - Internal Pointers_files/zrt_lookup.html" style="display: none;"></iframe></html>

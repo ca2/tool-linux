@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+rm -Rf $HOME/store_0.4_amd64
+
+cp -Rf $HOME/cmake/operating_system/tool-linux/build_deb/store_0.4_amd64 $HOME/store_0.4_amd64
+
+cp /store/$__SYSTEM_SLASHED_OPERATING_SYSTEM/store_amd64.deb
+
+unzip /store/$__SYSTEM_SLASHED_OPERATING_SYSTEM/app-core/store.zip -d $HOME/store_0.4_amd64/opt/store/bin/
+
+dpkg-deb --build --root-owner-group store_0.4_amd64
+
+cp store_0.4_amd64.deb /store/$__SYSTEM_SLASHED_OPERATING_SYSTEM/store_amd64.deb
+
+
+
+

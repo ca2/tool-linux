@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cmake -S ../stage -B .
+
+
+

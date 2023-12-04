@@ -1,0 +1,140 @@
+#!/bin/bash
+
+
+
+build_sensitive()
+{
+
+
+   cd $HOME
+
+   if [ ! -d "sensitive" ]; then
+
+      mkdir sensitive
+
+   fi
+
+   cd sensitive
+
+   if [ -d "build" ]; then
+
+      cd build
+
+      REMOTE=$(git config --get remote.origin.url)
+
+      if [ ! "$REMOTE" =  "https://github.com/ca2/build_sensitive" ]; then
+
+         echo "not build sensitive folder"
+
+         exit -1
+
+      fi
+
+   else
+
+      git clone https://github.com/ca2/build_sensitive build
+      
+      git clone https://github.com/ca2/sensitive
+
+   fi
+   
+
+}
+   
+ 
+install_build_cloud_mount()
+{
+
+   if [ ! -d "/build_cloud" ]; then
+
+      sudo mkdir "/build_cloud"
+
+   fi
+
+   if [ -L "/build" ]; then
+
+      LINK=$(readlink /build)
+
+      if [ ! "$LINK" = "/build_cloud" ]; then
+
+         sudo unlink /build
+
+         sudo ln -s /build_cloud /build
+
+      fi
+
+   else
+
+      sudo ln -s /build_cloud /build
+
+   fi
+
+   sudo bash -c "grep -qF \"//cloud.camilothomas.com/build /build_cloud\" /etc/fstab || echo \"//cloud.camilothomas.com/build /build_cloud cifs credentials=/home/$USER/sensitive/build/samba/.cloud_build,iocharset=utf8,uid=1000,dir_mode=0775,file_mode=0664 0 0\" >> /etc/fstab"
+
+   sudo mount /build_cloud
+
+}
+
+
+install_store_cloud_mount()
+{
+
+   if [ ! -d "/store_cloud" ]; then
+
+      sudo mkdir "/store_cloud"
+
+   fi
+
+   if [ -L "/store" ]; then
+
+      LINK=$(readlink /store)
+
+      if [ ! "$LINK" = "/store_cloud" ]; then
+
+         sudo unlink /store
+
+         sudo ln -s /store_cloud /store
+
+      fi
+
+   else
+
+      sudo ln -s /store_cloud /store
+
+   fi
+
+   sudo bash -c "grep -qF \"//cloud.camilothomas.com/store /store_cloud\" /etc/fstab || echo \"//cloud.camilothomas.com/store /store_cloud cifs credentials=/home/$USER/sensitive/build/samba/.cloud_store,iocharset=utf8,uid=1000,dir_mode=0775,file_mode=0664 0 0\" >> /etc/fstab"
+
+   sudo mount /store_cloud
+
+}
+
+
+. _distro__desktop_environment_and_release
+
+
+build_sensitive
+
+
+install_build_cloud_mount
+
+
+install_store_cloud_mount
+
+
+if [ ! -d $HOME/.config/systemd/user/ ]; then
+
+   mkdir -p $HOME/.config/systemd/user/
+
+fi
+
+cp $HOME/solution/basis/operating-system/tool-linux/service/build.service $HOME/.config/systemd/user/build.service
+
+
+
+systemctl --user enable build
+
+
+
+
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+opreport -gdf | op2calltree
+
+kcachegrind oprof.out.unnamed

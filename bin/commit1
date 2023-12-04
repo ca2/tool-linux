@@ -1,0 +1,68 @@
+#!/bin/bash
+
+
+if [ -z "$1" ]; then
+
+BASEDIR=$HOME/solution/basis
+
+else
+
+BASEDIR=$1
+
+fi
+
+
+commit()
+{
+
+        echo "Processing source/$1..."
+
+        cd $BASEDIR/$1
+
+
+	git add .
+        git commit -F$HOME/Desktop/dedicatory.txt
+        git push
+
+}
+
+
+commit operating-system/operating-system-linux
+commit operating-system/operating-system-posix
+commit operating-system/storage-linux
+commit operating-system/third-linux
+commit operating-system/tool-linux
+
+
+commit operating-system
+
+
+commit source/app
+commit source/app-cidadedecuritiba
+commit source/app-complex
+commit source/app-core
+commit source/app-simple
+commit source/app-veriwell
+commit source/ca2
+commit source/console
+commit source/console-core
+commit source/design
+commit source/game
+commit source/include
+commit source/third
+
+if [ -d "$BASEDIR/source/tranquillum" ]; then
+
+   commit source/tranquillum
+
+fi
+
+
+commit source
+
+
+commit .
+
+
+
+

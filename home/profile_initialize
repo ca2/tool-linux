@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+export __application="$HOME/application"
+export __archive_root="$HOME/__archive"
+export __archive="$__archive_root/archive"
+export __basis="$__archive_root/basis"
+export __sensitive="$__archive_root/sensitive"
+export __config="$HOME/__config"
+export __distro=$(<"$__config/distro.txt")
+export __distro_storage="$__archive/storage-linux/$__distro"
+
+PATH="$__archive/tool-linux/bin:$PATH"
+PATH="$__archive/tool-linux/build_bin:$PATH"
+PATH="$__archive/tool-linux/scripts:$PATH"
+
+export TIME_NAME="time-linux"
+
+
+
+# "strategic micro update"
+svn update "$__operating-system/operating-system-linux"
+svn update "$__archive/storage-linux"
+svn update "$__archive/tool-linux"
+
+sleep 1s
+
+
+watch_build &
+
+
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+. _distro__desktop_environment_and_release
+
+
+echo $UNDERSCORE_PLATFORM > $HOME/solution/basis/cmake-build-basis/platform.txt

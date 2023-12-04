@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+#BASE_DIR=`pwd`
+
+#APPLICATION_LIST_FILE_PATH="$BASE_DIR/application_list.txt"
+
+#find . -name application.txt -print > $APPLICATION_LIST_FILE_PATH
+
+
+application_build_helper --application-list
+
+
+

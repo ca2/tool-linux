@@ -1,0 +1,30 @@
+#!/bin/bash
+
+APPLICATION_LIST_FILE_PATH="application_list.txt"
+
+find . -name application.txt -print > _$APPLICATION_LIST_FILE_PATH.tmp
+
+APPLICATION_LIST_FILE_PATH="application_list.txt"
+
+echo "" > $APPLICATION_LIST_FILE_PATH
+
+while read line; do
+
+   APP_DIR=$(dirname $line)
+
+   APP_NAME=$(basename $APP_DIR)
+
+   ROOT_DIR=$(dirname $APP_DIR)
+
+   ROOT=$(basename $ROOT_DIR)
+
+   APP_ID="$ROOT/$APP_NAME"
+
+   echo "${APP_ID}"
+
+   echo "${APP_ID}" >> $APPLICATION_LIST_FILE_PATH
+
+done < _$APPLICATION_LIST_FILE_PATH.tmp
+
+
+

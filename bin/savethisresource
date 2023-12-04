@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+
+distro=`cat "/archive/distro.txt"`
+
+if [ "$distro" == "opensuse" ]; then
+
+/sbin/shutdown -h now
+
+else
+
+shutdown -h now
+
+fi
+
+
+
+

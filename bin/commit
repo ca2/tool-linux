@@ -1,0 +1,116 @@
+#!/bin/bash
+ 
+if [ -z "$1" ]; then
+ 
+        if [ -d .git ]; then
+ 
+                BASEDIR=$(pwd)
+ 
+                DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
+ 
+        else
+ 
+                if [ -f $HOME/current_working_directory.txt ]; then
+ 
+                        BASEDIR=`cat $HOME/current_working_directory.txt`
+ 
+                        BASEDIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${BASEDIR}")
+ 
+                        BASEDIR=$(sed -e 's/^\([A-Z]\)[:]/\/\1/'<<<"${BASEDIR}")
+ 
+                        BASEDIR=$(sed -e 's/\\/\//'<<<"${BASEDIR}")
+ 
+                fi
+ 
+                if [ -z "$BASEDIR" ]; then
+ 
+                        echo "Please run command:"
+                        echo ""
+                        echo "   set_working_directory <WORKING_DIRECTORY_PATH>"
+                        echo ""
+                        echo "to set the base folder path."
+                        echo ""
+                        echo "You can also run this command from a git repository folder."
+ 
+                        exit 0
+ 
+                fi
+ 
+        fi
+ 
+else
+ 
+        BASEDIR=$1
+ 
+fi
+ 
+path_pattern="path = *"
+ 
+pushd () {
+    command pushd "$@" > /dev/null
+}
+ 
+popd () {
+    command popd "$@" > /dev/null
+}
+ 
+ 
+submodule()
+{
+ 
+        if [ -d "$1" ]; then
+ 
+                pushd $1
+ 
+                DIR=$(pwd)
+ 
+                DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
+ 
+                echo "Processing $DIR..."
+ 
+                if [ -f .gitmodules ]; then
+ 
+                        while read line; do
+ 
+                                trimmed_line=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${line}")
+ 
+                                if [[ $trimmed_line == $path_pattern ]]; then
+ 
+                                        submodule_name=$(sed -e 's/^path\s*=\s*//'<<<"${line}")
+ 
+                                        submodule ./$submodule_name
+
+					git add $submodule_name
+ 
+                                fi
+ 
+                        done < ./.gitmodules
+ 
+                fi
+ 
+                popd
+ 
+#                git add -A .
+#                git commit -a -F$HOME/Desktop/dedicatory.txt
+#                git push
+
+		git add -A .
+		git update-index --refresh
+		commits=$(git diff-index HEAD)
+		if [ ! -z "$commits" ]; then
+			git commit -a -F$HOME/Desktop/dedicatory.txt
+		fi
+
+ 
+ 
+        fi
+ 
+}
+ 
+ 
+submodule $BASEDIR
+ 
+ 
+ 
+ 
+

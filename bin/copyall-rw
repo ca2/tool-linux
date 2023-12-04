@@ -1,0 +1,38 @@
+#!/bin/bash
+
+
+set appmatter=$HOME/.config/ca2/appmatter
+
+
+mkdir -p $appmatter/app/_matter > /dev/null 2>&1
+mkdir -p $appmatter/app-cidadedecuritiba/_matter > /dev/null 2>&1
+mkdir -p $appmatter/app-core/_matter > /dev/null 2>&1
+mkdir -p $appmatter/third/_matter > /dev/null 2>&1
+mkdir -p $appmatter/app-veriwell/_matter > /dev/null 2>&1
+mkdir -p $appmatter/app-simple/_matter > /dev/null 2>&1
+mkdir -p $appmatter/app-complex/_matter > /dev/null 2>&1
+
+
+rsync -r -u $__basis/app/source/app/_matter/* $appmatter/app/_matter/ > /dev/null 2>&1
+rsync -r -u $__basis/app/source/app-cidadedecuritiba/_matter/* $appmatter/app-cidadedecuritiba/_matter/ > /dev/null 2>&1
+rsync -r -u $__basis/app/source/app-core/_matter/* $appmatter/app-core/_matter/ > /dev/null 2>&1
+rsync -r -u $__basis/app/source/third/_matter/* $appmatter/third/_matter/ > /dev/null 2>&1
+rsync -r -u $__basis/app/source/app-veriwell/_matter/* $appmatter/app-veriwell/_matter/ > /dev/null 2>&1
+rsync -r -u $__basis/app/source/app-simple/_matter/* $appmatter/app-simple/_matter/ > /dev/null 2>&1
+rsync -r -u $__basis/app/source/app-complex/_matter/* $appmatter/app-complex/_matter/ > /dev/null 2>&1
+
+
+mkdir -p $__application/time-linux/x64/basis > /dev/null 2>&1
+mkdir -p $__application/time-linux/cmake > /dev/null 2>&1
+mkdir -p $__application/platform-linux > /dev/null 2>&1
+rsync -r -u $__basis/time-linux/x64/basis/* $__application/time-linux/x64/basis/ > /dev/null 2>&1
+rsync -r -u $__basis/time-linux/cmake/* $__application/time-linux/cmake/ > /dev/null 2>&1
+rsync -r -u $__basis/platform-linux/* $__application/platform-linux/ > /dev/null 2>&1
+
+
+copyall-matter
+
+
+
+
+

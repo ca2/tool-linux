@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Send Audio to Bilbo
+Exec=/home/camilo/__archive/archive/tool-linux/bin/saudio.bilbo
+Terminal=false
+OnlyShowIn=GNOME
+Type=Application
+StartupNotify=false
+X-GNOME-Autostart-enabled=true

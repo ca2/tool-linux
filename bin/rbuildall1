@@ -1,0 +1,10 @@
+
+
+distro=`cat /archive/distro.txt`
+
+export build_request=`date +"%Y-%m-%d-%H-%M-%S"`
+
+ssh $distro.ca2.cc "nohup bash -c /archive/tool/bin/buildall 2>&1 > /archive/build_request_log/build_request-$build_request.log" 2>&1 > /archive/build_request_log/build_request-$build_request.log
+
+
+

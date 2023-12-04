@@ -1,0 +1,6 @@
+#!/bin/bash
+
+/opt/google/chrome/google-chrome --user-data-dir=$HOME/.config/ca2/Chrome/Profile/default.browser_night   </dev/null &>/dev/null &
+
+
+

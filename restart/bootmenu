@@ -1,0 +1,11 @@
+update-grub
+
+cp /boot/grub/grub.cfg /boot/grub/grub-ubuntu.cfg
+cp /boot/grub/grub.cfg /boot/grub/grub-windows.cfg
+cp /boot/grub/grub.cfg /boot/grub/grub-windows8.cfg
+cp /boot/grub/grub.cfg /boot/grub/grub-hyperv.cfg
+cp /boot/grub/grub.cfg /boot/grub/grub-macos.cfg
+
+gedit /boot/grub/grub-windows8.cfg /boot/grub/grub-windows.cfg /boot/grub/grub-hyperv.cfg /boot/grub/grub-macos.cfg
+
+cp /boot/grub/grub-windows.cfg /boot/grub/grub.cfg

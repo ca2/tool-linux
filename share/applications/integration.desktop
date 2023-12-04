@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Integration
+GenericName=Integration
+Comment=Integration
+Exec="bash -c /home/camilo/solution/stage/operating-system/tool-linux/bin/integration; read"
+Terminal=true
+X-MultipleArgs=false
+Categories=Network;
+MimeType=
+

@@ -1,0 +1,65 @@
+#!/bin/sh
+
+
+if [ -z "$1" ]; then
+
+BASEDIR=$HOME/solution/basis
+
+else
+
+BASEDIR=$1
+
+fi
+
+
+checkout()
+{
+
+        echo "Processing source/$1..."
+
+        cd $BASEDIR/$1
+
+
+        git fetch
+        git checkout basis
+        git pull
+
+}
+
+
+checkout .
+
+
+checkout operating-system
+
+
+checkout operating-system/operating-system-linux
+checkout operating-system/operating-system-posix
+checkout operating-system/storage-linux
+checkout operating-system/third-linux
+checkout operating-system/tool-linux
+
+checkout source
+
+
+checkout source/app
+checkout source/app-cidadedecuritiba
+checkout source/app-complex
+checkout source/app-core
+checkout source/app-simple
+checkout source/app-veriwell
+checkout source/ca2
+checkout source/console
+checkout source/console-core
+checkout source/design
+checkout source/game
+checkout source/include
+checkout source/third
+
+if [ -d "$BASEDIR/source/tranquillum" ]; then
+
+   checkout source/tranquillum
+
+fi
+
+

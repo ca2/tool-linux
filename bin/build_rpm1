@@ -1,0 +1,39 @@
+#!/bin/bash
+
+
+PACKAGE_NAME="store-0.4"
+
+
+do_targz()
+{
+
+    cd $HOME/rpmbuild/SOURCES
+
+    tar -czvf ${PACKAGE_NAME}.tar.gz ${PACKAGE_NAME}
+
+}
+
+
+do_rpmbuild()
+{
+
+    cd $HOME/rpmbuild/SPECS
+
+    rpmbuild -ba store.spec
+
+}
+
+rm -Rf $HOME/rpmbuild
+
+cp -Rf $HOME/cmake/operating_system/tool-linux/build_rpm/rpmbuild $HOME/
+
+mkdir -p $HOME/rpmbuild/SOURCES/${PACKAGE_NAME}/opt/store/bin/
+
+unzip $HOME/app_core_store.zip -d $HOME/rpmbuild/SOURCES/${PACKAGE_NAME}/opt/store/bin/
+
+do_targz
+
+do_rpmbuild
+
+
+

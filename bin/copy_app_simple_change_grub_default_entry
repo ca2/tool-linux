@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+TARGET_FOLDER="$HOME/application/app_simple_change_grub_default_entry/time-linux/x64/basis/"
+
+SOURCE_FOLDER="$HOME/solution/basis/time-linux/x64/basis/"
+
+
+rm "$HOME/.local/share/applications/app-simple.change-grub-default-entry.desktop"
+mkdir -p "$TARGET_FOLDER"
+rsync -zavh --delete "$SOURCE_FOLDER" "$TARGET_FOLDER"
+$TARGET_FOLDER/_app_simple_change_grub_default_entry
+
+
+

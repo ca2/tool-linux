@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Windows
+Comment=Windows Desktop
+Exec=sudo /sbin/restart-windows
+Icon=/bergedge/hi5/icon/general/windows.png
+Terminal=false
+Categories=IDE;
+

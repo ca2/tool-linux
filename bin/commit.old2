@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+git submodule foreach "
+    git add -A .
+    git update-index --refresh
+    commits=\$(git diff-index HEAD)
+    if [ ! -z \"\$commits\" ]; then
+        git commit -a -F$HOME/Desktop/dedicatory.txt
+    fi"
+
+git add -A .
+git commit -a -F$HOME/Desktop/dedicatory.txt
+
+
+

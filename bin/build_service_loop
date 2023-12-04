@@ -1,0 +1,153 @@
+#!/bin/bash
+
+
+defer_mkdir()
+{
+
+   if [ ! -d "$1" ]; then
+
+      mkdir -p "$1"
+
+   fi
+
+}
+
+
+exists_erase()
+{
+
+   if [ -f "$1" ]; then
+
+      rm -f "$1"
+
+   fi
+
+}
+
+
+get_FILENOW()
+{
+
+   FILENOW=`date +"%Y-%m-%d-%H-%M-%S"`
+
+}
+
+
+get_full_hostname()
+{
+
+   if [ "$__SYSTEM_DISTRO_FAMILY" = "zypper" ]; then
+
+      FULL_HOSTNAME=$(cat /etc/hostname)
+
+   elif [ "$__SYSTEM_DISTRO" = "fedora" ]; then
+
+      FULL_HOSTNAME=$(hostnamectl --static)
+
+   elif [ "$__SYSTEM_DISTRO" = "ubuntu" ]; then
+
+      FULL_HOSTNAME=$(hostnamectl --static)
+
+   else
+
+      FULL_HOSTNAME=$(hostname -f)
+
+   fi
+
+}
+
+
+get_full_hostname
+
+
+get_FILENOW
+
+
+echo "Starting build_service_loop..."
+
+echo ""
+
+echo "$FILENOW"
+
+
+defer_mkdir "/build/control/$FULL_HOSTNAME/history"
+
+defer_mkdir "/home/build/bin"
+
+
+exists_erase "/build/control/$FULL_HOSTNAME/finish.txt"
+
+exists_erase "/build/control/$FULL_HOSTNAME/finished.txt"
+
+
+echo "$FILENOW" > "/build/control/$FULL_HOSTNAME/started.txt"
+
+cp "/build/control/$FULL_HOSTNAME/started.txt" /build/control/$FULL_HOSTNAME/history/$FILENOW-started.txt
+
+sleep 2s
+
+
+while true; do
+
+   if [ -f /build/control/$FULL_HOSTNAME/finish.txt ]; then
+
+      sleep 3s
+
+      break
+
+   elif [ -f /build/control/$FULL_HOSTNAME/command.txt ]; then
+   
+      sleep 1s
+
+      mv /build/control/$FULL_HOSTNAME/command.txt /home/build/bin/command
+      
+      chmod +x /home/build/bin/command
+
+      echo "Script to be executed"
+      echo "BEGIN{"
+      echo ""
+      cat /home/build/bin/command
+      echo ""
+      echo "}END"
+      
+      cd $HOME
+
+      get_FILENOW
+      
+      cp "/home/build/bin/command" "/build/control/$FULL_HOSTNAME/history/$FILENOW-command.txt"
+      
+      touch "/build/control/$FULL_HOSTNAME/history/$FILENOW-log.txt"
+
+      echo "$FILENOW" > "/build/control/$FULL_HOSTNAME/command-started.txt"
+
+      /home/build/bin/command 2>&1 | tee "/build/control/$FULL_HOSTNAME/history/$FILENOW-log.txt"
+
+      retbash="${PIPESTATUS[0]}" retzsh="${pipestatus[1]}" retfinal=$?
+
+      echo "response:$retfinal" > /build/control/$FULL_HOSTNAME/response.txt
+
+      cp "/build/control/$FULL_HOSTNAME/response.txt" "/build/control/$FULL_HOSTNAME/history/$FILENOW-response.txt"
+
+      exists_erase "/home/build/bin/command"
+
+   fi
+
+   sleep 2s
+
+done
+
+exists_erase "/build/control/$FULL_HOSTNAME/finish.txt"
+
+exists_erase "/build/control/$FULL_HOSTNAME/started.txt"
+
+echo "$FILENOW" > "/build/control/$FULL_HOSTNAME/finished.txt"
+
+cp "/build/control/$FULL_HOSTNAME/finished.txt" /build/control/$FULL_HOSTNAME/history/$FILENOW-finished.txt
+
+sleep 5s
+
+shutdown -h now
+
+
+
+

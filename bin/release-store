@@ -1,0 +1,13 @@
+#!/bin/bash
+
+build=`date +"%Y-%m-%d-%H-%M-%S"`
+
+echo "$build" > /node/public/build.txt
+
+basedir="/node/public/store/$build"
+
+mkdir -p "$basedir"
+
+cp -Rf /xcore/time/x64/basis/* "$basedir/"
+
+

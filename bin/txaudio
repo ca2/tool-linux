@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# parameters
+# server:port 
+
+pactl load-module module-null-sink sink_name=remote
+pacmd set-default-sink remote
+ffmpeg -f pulse -i "remote.monitor" -ac 2 -acodec pcm_u8 -ar 48000 -f u8 "udp://$1"
+

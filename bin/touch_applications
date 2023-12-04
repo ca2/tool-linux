@@ -1,0 +1,57 @@
+#!/bin/bash
+
+BASE_DIR=`pwd`
+
+APPLICATION_LIST_FILE_PATH="application_list.txt"
+
+while read line; do
+
+   cd $BASE_DIR
+
+   APP_DIR=$(dirname $line)
+
+   APP_NAME=$(basename $APP_DIR)
+
+   ROOT_DIR=$(dirname $APP_DIR)
+
+   ROOT=$(basename $ROOT_DIR)
+
+   APP_ID="$ROOT/$APP_NAME"
+
+   APP_REL=${APP_ID//[\/-]/_}
+
+   echo "------------------------------------------------------"
+   echo "${__SYSTEM_UNDERSCORE_OPERATING_SYSTEM}/_${APP_REL}.cpp"
+   echo ""
+
+   if [ ! -d "$APP_DIR/operating-system/${__SYSTEM_SLASHED_OPERATING_SYSTEM}" ]; then
+
+      mkdir -p "$APP_DIR/operating-system/${__SYSTEM_SLASHED_OPERATING_SYSTEM}"
+
+   fi
+
+   TARGET_APP_REL_CPP="$APP_DIR/operating-system/${__SYSTEM_SLASHED_OPERATING_SYSTEM}/_${APP_REL}.cpp"
+
+   if [ ! -s $TARGET_APP_REL_CPP ]; then
+
+      SOURCE_APP_REL_CPP="$APP_DIR/_${APP_REL}.cpp"
+
+      cp "$SOURCE_APP_REL_CPP" "$TARGET_APP_REL_CPP"
+
+   fi
+
+   if [ ! -d "$APP_DIR/.link_object" ]; then
+
+       mkdir $APP_DIR/.link_object
+
+   fi
+
+   touch $APP_DIR/.link_object/_matter.zip.o
+
+#   application_build_helper "$APP_DIR"
+
+done <$APPLICATION_LIST_FILE_PATH
+
+
+
+

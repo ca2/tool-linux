@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+dir="$1"
+
+
+find "$dir" -maxdepth 1 -type f -exec objcopy --strip-debug {} \;
+
+
+

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+
+cd $BASE_DIR
+mkdir gnome
+
+
+add_item()
+{
+
+   cd $BASE_DIR
+   zip "gnome/$PACKAGE_NAME.zip" "$1"
+
+}
+
+add_item libacme.so
+add_item libacme_linux.so
+add_item libacme_posix.so
+add_item libapex.so
+add_item libapex_linux.so
+add_item libapex_posix.so
+add_item libaqua.so
+add_item libaura.so
+add_item libaura_linux.so
+add_item libaura_posix.so
+add_item libwindowing_x11.so
+add_item libnode_gtk.so
+add_item libnode_gnome.so
+add_item libdesktop_environment_gnome.so
+add_item libnode_linux.so
+

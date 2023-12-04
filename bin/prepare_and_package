@@ -1,0 +1,319 @@
+ #!/bin/bash
+
+OUTPUT_DIR="$(pwd)/output"
+
+BASE_DIR=$1
+
+if [ -z "$BASE_DIR" ]; then
+
+BASE_DIR=$HOME/solution/basis
+
+fi
+
+
+cd $BASE_DIR
+
+
+. _distro__desktop_environment_and_release
+
+
+# start_zip()
+# {
+
+#    cd $PACKAGE_DIR
+#    echo "distro=$DISTRO" > "_____${UNDERSCORE_PLATFORM}_${1}.txt"
+#    echo "desktop_environment=$DESKTOP_ENVIRONMENT" >> "_____${UNDERSCORE_PLATFORM}_${1}.txt"
+#    echo "distro_release=$DISTRO_RELEASE" >> "_____${UNDERSCORE_PLATFORM}_${1}.txt"
+#    echo "component=$1" >> "_____${UNDERSCORE_PLATFORM}_${1}.txt"
+#    zip -FS "$APP_PACKAGE_ZIP_PATH" "_____${UNDERSCORE_PLATFORM}_${1}.txt"
+#    rm "_____${UNDERSCORE_PLATFORM}_${1}.txt"
+#    zip "$APP_PACKAGE_ZIP_PATH" "____distro.txt"
+#    zip "$APP_PACKAGE_ZIP_PATH" "___distro_release.txt"
+#    zip "$APP_PACKAGE_ZIP_PATH" "__desktop_environment.txt"
+#    zip "$APP_PACKAGE_ZIP_PATH" "_platform.txt"
+
+# }
+
+
+# add_output_item()
+# {
+
+#    cd $OUTPUT_DIR
+#    zip "$APP_PACKAGE_ZIP_PATH" "$1"
+
+# }
+
+
+# add_acme()
+# {
+
+#    start_zip $1
+
+#    add_output_item libacme.so
+#    add_output_item libacme_linux.so
+#    add_output_item libacme_posix.so
+
+# }
+
+
+# add_apex()
+# {
+
+#    add_acme $1
+
+#    add_output_item libapex.so
+#    add_output_item libapex_linux.so
+#    add_output_item libapex_posix.so
+
+# }
+
+
+# add_aqua()
+# {
+
+#    add_apex $1
+
+#    add_output_item libaqua.so
+
+# }
+
+
+# add_aura()
+# {
+
+#    add_aqua $1
+
+#    add_output_item libaura.so
+#    add_output_item libaura_linux.so
+#    add_output_item libaura_posix.so
+#    add_output_item libnode_linux.so
+
+#    if [ "$DESKTOP_ENVIRONMENT" = "kde" ]; then
+
+#       add_output_item libwindowing_xcb.so
+#       add_output_item libnode_kde.so
+#       add_output_item libdesktop_environment_kde.so
+
+#    elif [ "$DESKTOP_ENVIRONMENT" = "gnome" ]; then
+
+#       add_output_item libwindowing_x11.so
+#       add_output_item libnode_gtk.so
+#       add_output_item libnode_gnome.so
+#       add_output_item libdesktop_environment_gnome.so
+
+#    fi
+
+# }
+
+
+# add_axis()
+# {
+
+#    add_aura $1
+
+#    add_output_item libaxis.so
+
+# }
+
+
+
+# add_base()
+# {
+
+#    add_axis $1
+
+#    add_output_item libbase.so
+
+# }
+
+
+
+# add_bred()
+# {
+
+#    add_base $1
+
+#    add_output_item libbred.so
+
+# }
+
+
+# add_core()
+# {
+
+#    add_bred $1
+
+#    add_output_item libcore.so
+
+# }
+
+
+
+# add_layer()
+# {
+
+#    if [ "$1" = "acme" ]; then
+
+#       add_acme $1
+
+#    elif [ "$1" = "apex" ]; then
+
+#       add_apex $1
+
+#    elif [ "$1" = "aqua" ]; then
+
+#       add_aqua $1
+
+#    elif [ "$1" = "aura" ]; then
+
+#       add_aura $1
+
+#    elif [ "$1" = "axis" ]; then
+
+#       add_axis $1
+
+#    elif [ "$1" = "base" ]; then
+
+#       add_base $1
+
+#    elif [ "$1" = "bred" ]; then
+
+#       add_bred $1
+
+#    else
+
+#       add_core $1
+
+#    fi
+
+
+# }
+
+
+APPLICATION_MATTER_LIST_FILE_PATH="$BASE_DIR/application_matter_list.txt"
+
+find $BASE_DIR -name application_matter.txt -print > $APPLICATION_MATTER_LIST_FILE_PATH
+
+PACKAGE_DIR="/store/$DISTRO/$DESKTOP_ENVIRONMENT/$DISTRO_RELEASE"
+
+mkdir -p $PACKAGE_DIR
+
+# echo "$DISTRO" > "$PACKAGE_DIR/____distro.txt"
+# echo "$DESKTOP_ENVIRONMENT" > "$PACKAGE_DIR/___desktop_environment.txt"
+# echo "$DISTRO_RELEASE" > "$PACKAGE_DIR/__distro_release.txt"
+# echo "$UNDERSCORE_PLATFORM" > "$PACKAGE_DIR/_platform.txt"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/acme.zip"
+
+# add_layer "acme"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/apex.zip"
+
+# add_layer "apex"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/aqua.zip"
+
+# add_layer "aqua"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/aura.zip"
+
+# add_layer "aura"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/axis.zip"
+
+# add_layer "axis"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/base.zip"
+
+# add_layer "base"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/bred.zip"
+
+# add_layer "bred"
+
+# APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/core.zip"
+
+# add_layer "core"
+
+
+while read line; do
+
+   APP_DIR=$(dirname $line)
+
+   APP_NAME=$(basename $APP_DIR)
+
+   ROOT_DIR=$(dirname $APP_DIR)
+
+   ROOT=$(basename $ROOT_DIR)
+
+   APP_ID="$ROOT/$APP_NAME"
+
+   APP_REL=${APP_ID//[\/-]/_}
+
+   APP_PACKAGE_ZIP_PATH="$PACKAGE_DIR/$APP_REL.zip"
+
+   LAYER_FILE_PATH="$APP_DIR/linux/layer.txt"
+
+   DEPS_FILE_PATH="$APP_DIR/platform/$SLASHED_PLATFORM/deps.txt"
+
+   if [ -f $LAYER_FILE_PATH ]; then
+
+      LAYER=$(cat $APP_DIR/linux/layer.txt)
+
+   else
+
+
+      LAYER=""
+
+   fi
+
+   LAYER=`echo $LAYER`
+
+   if [ -z "$LAYER" ]; then
+
+      LAYER="core"
+
+   fi
+
+   echo "------------------------------------------------------"
+   echo "$APP_ID"
+   echo "Layer: $LAYER"
+   echo ""
+   echo "Package Folder: $APP_PACKAGE_ZIP_PATH"
+   echo ""
+   echo ""
+   echo ""
+   echo ""
+
+   application_build_helper "$APP_DIR"
+   
+   application_build_helper -package "$APP_DIR"
+
+
+   # start_zip $APP_REL
+
+   # cd $(dirname $LAYER_FILE_PATH)
+   # zip $APP_PACKAGE_ZIP_PATH $(basename $LAYER_FILE_PATH)
+
+   # cd $OUTPUT_DIR
+   # zip $APP_PACKAGE_ZIP_PATH "_${APP_REL}"
+   # zip $APP_PACKAGE_ZIP_PATH "lib${APP_REL}.so"
+
+   # while read depline; do
+
+   #    if [ "$depline" = "node_linux" ]; then
+
+   #       :      
+
+   #    else
+
+   #       zip $APP_PACKAGE_ZIP_PATH "lib${depline}.so"
+
+   #    fi
+
+   # done <$DEPS_FILE_PATH   
+   
+done <$APPLICATION_MATTER_LIST_FILE_PATH
+
+
+

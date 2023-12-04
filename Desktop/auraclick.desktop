@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=auraclick
+GenericName=auraclick
+Comment=auraclick
+Exec=/xcore/time/x64/basis/app : app=app-core/auraclick build_number=basis locale=_std schema=_std
+Icon=/xcore/app-core/appmatter/auraclick/_std/_std/main/icon.png
+Terminal=false
+X-MultipleArgs=false
+Categories=Utilities;
+StartupNotify=true
+MimeType=

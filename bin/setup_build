@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+BASE_DIR=$(pwd)
+
+
+#prepare_applications
+
+
+setup_build()
+{
+
+
+	cd $BASE_DIR
+	
+	cmake configure $HOME/solution/basis
+	
+
+}
+
+
+setup_build
+
+#make _console_application_build_helper
+
+
+

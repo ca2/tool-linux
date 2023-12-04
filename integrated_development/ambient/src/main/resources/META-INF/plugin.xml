@@ -1,0 +1,46 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>integrated_development.ambient</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Integrated Development Ambient</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@ca2.software" url="https://ca2.software">ca2.software</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    <h1>Integrated Development Theme switching through Ambient.</h1><br>
+    <h2>Ambient Plugin enables theme switching through Ambient application.</h2>
+To use it:
+    <ul>
+     <li>Install Ambient application from ca2 store <a href="https://ca2.store/">https://ca2.store/</a>.</li>
+     <li>Select Light Mode in Ambient application</li>
+     <li>Select the desired theme in CLion for using during Light Mode.</li>
+     <li>Select Dark Mode in Ambient application</li>
+     <li>Select the desired theme in CLion for using during Dark Mode.</li>
+    </ul>
+<br>
+After these steps, if you switch between Light/Dark Mode in Ambient Application,
+CLion will have the Theme changed respectively.
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+    </extensions>
+
+    <applicationListeners>
+        <listener class="integrated_development.ambient.check_ambient_change" topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
+
+</idea-plugin>

@@ -1,0 +1,11 @@
+[Unit]
+Description=build service
+PartOf=graphical-session.target
+RequiresMountsFor=/build /storage_cloud /store_cloud
+
+[Service]
+ExecStart=bash -c "%h/solution/basis/operating-system/tool-linux/bin/build_service"
+Type=oneshot
+
+[Install]
+WantedBy=graphical-session.target

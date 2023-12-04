@@ -1,0 +1,7 @@
+#!/bin/bash
+
+user=$1
+
+group=$2
+
+sudo usermod -a -G $group $user

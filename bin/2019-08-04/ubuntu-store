@@ -1,0 +1,22 @@
+#!/bin/bash
+
+datetime=`date +"%Y-%m-%d-%H-%M-%S"`
+
+build=`wget -q -O - https://api.ca2.cc/store/ubuntu_build?$datetime`
+
+baseurl="https://timeserver.ca2.cc/ubuntu/$build"
+
+appdir="$HOME/application"
+
+mkdir -p "$appdir"
+
+cd "$appdir"
+
+script="one-liner-$build.sh"
+
+curl -s "$baseurl/one-liner.sh" --output $script
+
+chmod a+x $script
+
+./$script
+   

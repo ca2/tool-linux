@@ -1,0 +1,38 @@
+#!/bin/bash
+
+function killall_rw()
+{
+
+   killall -9 -e /core/time/x64/basis/app_core_auraclick > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_core_auratype > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_core_desk > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_core_weather > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_core_clockverse > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_core_todo > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_veriwell_waven > /dev/null 2>&1
+   killall -9 -e /core/time/x64/basis/app_core_resident > /dev/null 2>&1
+
+   killall -9 -e /xcore/time/x64/basis/app_core_auraclick > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_core_auratype > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_core_desk > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_core_weather > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_core_clockverse > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_core_todo > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_veriwell_waven > /dev/null 2>&1
+   killall -9 -e /xcore/time/x64/basis/app_core_resident > /dev/null 2>&1
+
+   killall -9 -e /linux/time/x64/basis/app_core_auraclick > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_core_auratype > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_core_desk > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_core_weather > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_core_clockverse > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_core_todo > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_veriwell_waven > /dev/null 2>&1
+   killall -9 -e /linux/time/x64/basis/app_core_resident > /dev/null 2>&1
+
+}
+
+killall_rw
+
+
+

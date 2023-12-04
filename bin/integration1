@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+
+function build()
+{
+
+	cd $HOME/solution/stage
+
+	checkout
+
+	do_cmake clean
+
+	do_cmake all
+
+	package
+
+}
+
+
+
+build
+
+
+
+

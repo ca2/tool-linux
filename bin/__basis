@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cmake -S ../basis -B . -DCMAKE_BUILD_TYPE=Debug
+
+
+

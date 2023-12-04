@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+distro=`cat "/archive/distro.txt"`
+
+
+/archive/tool/bin/cifs_item share
+
+
+/archive/tool/bin/cifs_item build
+
+
+# /archive/tool/bin/cifs_item xcore_linux
+
+
+mount /mnt/share
+
+mount /mnt/build
+
+# mount /mnt/xcore_linux
+
+
+ln -s /mnt/share /share
+
+ln -s /mnt/build/$distro /build
+
+# ln -s /mnt/xcore_linux /xcore
+
+
+

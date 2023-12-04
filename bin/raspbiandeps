@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+
+sudo apt -y install pkg-config libcairo2-dev zlib1g-dev libfreeimage-dev libidn11-dev libncurses-dev libpango1.0-dev libssl-dev libxcb-util-dev libxkbcommon-x11-dev libmpg123-dev libxkbcommon-dev libglew-dev libsqlite3-dev libxkbcommon-x11-dev libosmesa6-dev libxcb-image0-dev libavcodec-dev libasound2-dev libglib2.0-dev libdbus-glib-1-dev libx11-xcb-dev libxcb-icccm4-dev libxcb-xinput-dev libbz2-dev libavformat-dev libswscale-dev libgtk-3-dev libayatana-appindicator3-dev libxxf86vm-dev libxcb-randr0-dev libswresample-dev libgconf2-dev zip librsvg2-dev libstartup-notification0-dev libv4l-dev libudev-dev
+
+
+
+# sudo apt -y install extra-cmake-modules libcairo2-dev zlib1g-dev libfreeimage-dev libidn11-dev libncurses-dev libpango1.0-dev libssl-dev libxcb-util-dev libkf5coreaddons-dev libxkbcommon-x11-dev libmpg123-dev qttools5-dev-tools qtbase5-dev libxkbcommon-dev libglew-dev libsqlite3-dev plasma-workspace-dev libxkbcommon-x11-dev libqt5x11extras5-dev libosmesa6-dev libxcb-image0-dev libkf5notifications-dev libavcodec-dev libasound2-dev libglib2.0-dev libdbus-glib-1-dev libx11-xcb-dev libxcb-icccm4-dev libxcb-xinput-dev qttools5-dev libbz2-dev libavformat-dev libswscale-dev
+ 
+
+# kf5-knotifications-devel extra-cmake-modules zlib-devel libidn-devel ncurses-devel openssl-devel cairo-devel pango-devel xcb-util-image-devel qt5-qtbase-devel qt5-qttools-devel qt5-qttools-static qt5-qtx11extras-devel ffmpeg-devel xcb-util-devel xcb-util-wm-devel libxkbcommon-devel libxkbcommon-x11-devel sqlite-devel glew-devel mesa-libOSMesa-devel freeimage-devel plasma-workspace-devel kf5-kcoreaddons-devel mpg123-devel
+
+
+
+

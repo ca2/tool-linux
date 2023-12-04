@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+cat /archive/tool/fstab/xcore_linux >> /etc/fstab
+
+
+
+
+

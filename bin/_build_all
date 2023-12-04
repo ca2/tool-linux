@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+#   [Linux]
+#
+
+
+buildall () {
+
+   export close="$1"
+
+   . _build_started
+
+   _build_clean
+
+   _build_update
+
+   mkdir -p "$buildfolder/$TIME_NAME/x64/stage"
+
+   cd "$buildfolder/platform/seed/metaseed"
+
+   codeblocks /ni --no-log --no-splash-screen --build all.workspace --target='stage' 2>&1 | tee -a $log
+
+#   [[ $a == z* ]]
+
+#   builderror=${PIPESTATUS[0]}
+
+   regexp="0[[:space:]]error\(s\)*"
+
+   echo 2>&1 | tee -a $log
+
+   echo 2>&1 | tee -a $log
+
+   echo "Code::Blocks build finished..." 2>&1 || tee -a $log
+
+   echo 2>&1 | tee -a $log
+
+   echo 2>&1 | tee -a $log
+   
+   loglastline=`awk '/./{line=$0} END{print line}' "$log"`
+
+   if [[ $loglastline == $regexp ]]; then
+
+      echo "Build \"$build\" finished with 0 errors!! " 2>&1 | tee -a $log
+
+      echo 2>&1 | tee -a $log
+
+      echo 2>&1 | tee -a $log
+   
+      _build_ok
+
+   else
+
+      . _build_failed
+
+   fi
+
+   if [ $close -ne 0 ]; then
+
+      savethisresource
+
+   fi
+
+}
+
+if [ -f /build/build/build.txt ]; then
+
+	rm /build/build/build.txt
+
+fi
+
+export close=0
+
+if [ -f /build/build/build_and_close.txt ]; then
+
+	rm /build/build/build_and_close.txt
+
+   export close=1
+
+fi
+
+buildall "$close"
+
+
+

@@ -1,0 +1,1 @@
+#define LINUX_UBUNTU 1

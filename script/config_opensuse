@@ -1,0 +1,27 @@
+#!/bin/bash
+
+
+
+
+if [ ! -f "~/archive/__distro.h" ]; then
+
+	echo "#define LINUX_UBUNTU 1" > ~/archive/__distro.h
+	
+fi
+
+if [ ! -f "~/archive/distro.txt" ]; then
+
+	printf %s "ubuntu" > ~/archive/distro.txt
+	
+fi
+
+if [ ! -f "~/archive/name.txt" ]; then
+
+	printf %s "Ubuntu" > ~/archive/name.txt
+	
+fi
+
+
+
+
+
