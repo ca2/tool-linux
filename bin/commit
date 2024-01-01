@@ -98,7 +98,7 @@ submodule()
 		git update-index --refresh
 		commits=$(git diff-index HEAD)
 		if [ ! -z "$commits" ]; then
-			git commit -a -F$HOME/Desktop/dedicatory.txt
+			git commit -a -F$HOME/dedicatory.txt
 		fi
 
  

@@ -2,7 +2,7 @@
 
 # rpmfusion and packager at ./fedora_setup
 
-sudo dnf -y install ninja-build cmake gcc-c++ pkgconfig dbus-glib-devel libappindicator-gtk3-devel gtk3-devel zlib-devel libidn-devel ncurses-devel openssl-devel cairo-devel pango-devel xcb-util-image-devel ffmpeg-devel xcb-util-devel xcb-util-wm-devel libxkbcommon-devel libxkbcommon-x11-devel GConf2-devel sqlite-devel glew-devel mesa-libOSMesa-devel freeimage-devel mpg123-devel librsvg2-devel alsa-lib-devel startup-notification-devel libv4l-devel libudev-devel libarchive-devel assimp-devel libcurl-devel libinput-devel rpm-build motif-devel
+sudo dnf -y --allowerasing install ninja-build cmake gcc-c++ pkgconfig dbus-glib-devel libappindicator-gtk3-devel gtk3-devel zlib-devel libidn-devel ncurses-devel openssl-devel cairo-devel pango-devel xcb-util-image-devel ffmpeg-devel xcb-util-devel xcb-util-wm-devel libxkbcommon-devel libxkbcommon-x11-devel GConf2-devel sqlite-devel glew-devel mesa-libOSMesa-devel freeimage-devel mpg123-devel librsvg2-devel alsa-lib-devel startup-notification-devel libv4l-devel libudev-devel libarchive-devel assimp-devel libcurl-devel libinput-devel rpm-build motif-devel
 sudo dnf -y groupinstall "X Software Development"
 
 
