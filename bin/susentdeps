@@ -1,0 +1,8 @@
+
+
+sudo zypper install -y -t pattern devel_C_C++
+
+
+sudo zypper install -y extra-cmake-modules kcoreaddons-devel knotifications-devel kconfigwidgets-devel kio-devel kiconthemes-devel plasma-framework-devel plasma5-workspace-devel libqt5-qttools-devel libqt5-qtx11extras-devel
+
+
