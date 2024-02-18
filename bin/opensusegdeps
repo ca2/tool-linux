@@ -1,0 +1,7 @@
+
+
+
+sudo zypper install -y -t pattern devel_C_C++
+
+
+sudo zypper install -y libarchive-devel mpg123-devel cairo-devel freetype2-devel libidn-devel libcurl-devel libxcb-devel libX11-devel libXi-devel libXrender-devel xcb-util-devel libxkbcommon-devel libXt-devel wayland-devel libopenssl-devel sqlite3-devel pango-devel dbus-1-glib-devel startup-notification-devel gtk3-devel libappindicator3-devel alsa-devel libinput-devel ffmpeg-devel
