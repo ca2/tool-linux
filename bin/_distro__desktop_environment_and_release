@@ -184,7 +184,11 @@ if [ -z "$__SYSTEM_DESKTOP_ENVIRONMENT" ]; then
 fi
 
 
-if [ "$__SYSTEM_DISTRO" = "ubuntu" ]; then
+if [ "$__SYSTEM_DISTRO" = "opensuse-tumbleweed" ]; then
+
+    __SYSTEM_SLASHED_OPERATING_SYSTEM="$__SYSTEM_DISTRO/$__SYSTEM_DISTRO_BRANCH/${__SYSTEM_DISTRO_RELEASE:0:4}"
+
+elif [ "$__SYSTEM_DISTRO" = "ubuntu" ]; then
 
    if [ "${__SYSTEM_DESKTOP_ENVIRONMENT}" = "kde" ]; then
 
