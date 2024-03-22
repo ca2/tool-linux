@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+
+sudo pacman -S cmake ninja pkgconf freeimage openmotif dbus-glib libayatana-appindicator glew assimp
