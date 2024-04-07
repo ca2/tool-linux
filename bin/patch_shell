@@ -28,8 +28,8 @@ patch_rc_file()
       echo "# ca2 patch_shell" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
-      echo "export GPG_TTY=\$(tty)" >> $RC_FILE
-      echo "gpg-connect-agent updatestartuptty /bye >/dev/null" >> $RC_FILE
+#      echo "export GPG_TTY=\$(tty)" >> $RC_FILE
+#      echo "gpg-connect-agent updatestartuptty /bye >/dev/null" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "CA2_SCRIPT_DIR=\"$SCRIPT_DIR\"" >> $RC_FILE
@@ -51,6 +51,9 @@ patch_rc_file()
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "export PATH" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo ". defer_ssh_agent" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
       echo ". _distro__desktop_environment_and_release" >> $RC_FILE
