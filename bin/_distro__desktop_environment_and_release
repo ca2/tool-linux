@@ -1,8 +1,7 @@
 #!/bin/bash
 
 
-eval `__distro_release`
-
+eval `_distro_release`
 
 
 export __SYSTEM_DISTRO
