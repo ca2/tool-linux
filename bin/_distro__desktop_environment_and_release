@@ -4,7 +4,6 @@
 eval `_distro_release`
 
 
-
 export __SYSTEM_DISTRO
 export __SYSTEM_DISTRO_FAMILY
 export __SYSTEM_DISTRO_BRANCH
