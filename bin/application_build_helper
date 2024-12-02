@@ -4,6 +4,6 @@
 ARCHITECTURE=`eval uname -m`
 
 
-application_build_helper_$ARCHITECTURE
+application_build_helper_$ARCHITECTURE "$@"
 
 
