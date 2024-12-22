@@ -4,4 +4,4 @@
 sudo zypper install -y -t pattern devel_C_C++
 
 
-sudo zypper install -y cmake ninja libarchive-devel mpg123-devel cairo-devel freetype2-devel libidn-devel libcurl-devel libxcb-devel libX11-devel libXi-devel libXrender-devel xcb-util-devel libxkbcommon-devel libXt-devel wayland-devel libopenssl-devel sqlite3-devel pango-devel dbus-1-glib-devel startup-notification-devel gtk3-devel libappindicator3-devel alsa-devel libinput-devel ffmpeg-devel xcb-util-image-devel motif-devel libv4l-devel glew-devel assimp-devel freeimage-devel libudev-devel libXxf86vm-devel Mesa-libGLESv3-devel
+sudo zypper install -y cmake ninja libarchive-devel mpg123-devel cairo-devel freetype2-devel libidn-devel libcurl-devel libxcb-devel libX11-devel libXi-devel libXrender-devel xcb-util-devel libxkbcommon-devel libXt-devel wayland-devel libopenssl-devel sqlite3-devel pango-devel dbus-1-glib-devel startup-notification-devel gtk4-devel alsa-devel libinput-devel ffmpeg-devel xcb-util-image-devel motif-devel libv4l-devel glew-devel assimp-devel freeimage-devel libudev-devel libXxf86vm-devel Mesa-libGLESv3-devel wayland-devel wayland-protocols-devel
