@@ -56,7 +56,7 @@ patch_rc_file()
       echo ". defer_ssh_agent" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
-      echo ". _distro__desktop_environment_and_release" >> $RC_FILE
+      echo ". _operating_system" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "# end ca2 patch_shell + 4 new lines" >> $RC_FILE
@@ -98,10 +98,10 @@ patch_zshrc()
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 
-. $SCRIPT_DIR/_distro__desktop_environment_and_release
+. $SCRIPT_DIR/_operating_system
 
 
-#if [ "$__SYSTEM_DISTRO_FAMILY" = "debian" ] || [ "$__SYSTEM_DISTRO_FAMILY" = "arch" ]; then
+#if [ "$__OPERATING_SYSTEM_FAMILY" = "debian" ] || [ "$__OPERATING_SYSTEM_FAMILY" = "arch" ]; then
 
 patch_profile
 
@@ -114,7 +114,7 @@ patch_zshrc
 #fi
 
 
-#if [ "$__SYSTEM_DISTRO" = "raspbian" ]; then
+#if [ "$__OPERATING_SYSTEM" = "raspbian" ]; then
 
 #   patch_bashrc
 

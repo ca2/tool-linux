@@ -4,6 +4,6 @@
 ARCHITECTURE=`eval uname -m`
 
 
-_distro_release_$ARCHITECTURE
+__operating_system_$ARCHITECTURE
 
 
