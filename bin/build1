@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+
+logicalCpuCount=$([ $(uname) = 'Darwin' ] && 
+                       sysctl -n hw.logicalcpu_max || 
+                       lscpu -p | egrep -v '^#' | wc -l)
+
+build_parallelization=$((logicalCpuCount-1))
+
+echo "Build Parallelization $build_parallelization"
+
+ninja -j $build_parallelization "$@"
+
+
+
+
