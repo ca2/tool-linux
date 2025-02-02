@@ -56,7 +56,7 @@ patch_rc_file()
       echo ". defer_ssh_agent" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
-      echo ". _operating_system" >> $RC_FILE
+      echo ". _ambient" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "" >> $RC_FILE
       echo "# end ca2 patch_shell + 4 new lines" >> $RC_FILE
@@ -98,7 +98,7 @@ patch_zshrc()
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 
-. $SCRIPT_DIR/_operating_system
+. $SCRIPT_DIR/_ambient
 
 
 #if [ "$__OPERATING_SYSTEM_FAMILY" = "debian" ] || [ "$__OPERATING_SYSTEM_FAMILY" = "arch" ]; then

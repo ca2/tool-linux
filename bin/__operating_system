@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-
-ARCHITECTURE=`eval uname -m`
-
-
-__operating_system_$ARCHITECTURE
-
-

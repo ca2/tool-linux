@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+eval `__ambient --id-payload-listing`
+
+
+export __SYSTEM
+export __SYSTEM_FAMILY
+export __SYSTEM_BRANCH
+export __SYSTEM_RELEASE
+export __SYSTEM_SUDO_INSTALL
+export __SYSTEM_AMBIENT_RELEASE
+export __AMBIENT
+
+
+
