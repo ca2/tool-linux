@@ -1,13 +1,15 @@
 #!/bin/sh
 
 
-if [[ $0 != $BASH_SOURCE ]]; then
+if [[ "$0" != "$BASH_SOURCE" ]]; then
 
-   #echo "_ambient is being sourced"
+   #echo "patch_shell is being sourced"
 
-   SCRIPT_PATH=$BASH_SOURCE
+   SCRIPT_PATH="$BASH_SOURCE"
    
 else
+
+   #echo "patch_shell is being run"
 
    SCRIPT_PATH=$0
 
