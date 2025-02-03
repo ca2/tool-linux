@@ -9,8 +9,6 @@ if [[ $0 != $BASH_SOURCE ]]; then
    
 else
 
-   echo "_ambient is being run. This is likely to be wrong. _ambient should be sourced..."
-
    SCRIPT_PATH=$0
 
 fi

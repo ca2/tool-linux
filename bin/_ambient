@@ -1,15 +1,52 @@
 #!/usr/bin/env bash
 
+do_ambient()
+{
 
-if [[ $0 != $BASH_SOURCE ]]; then
+   FOLDER="$1"
 
-   #echo "_ambient is being sourced"
 
-   SCRIPT_PATH=$BASH_SOURCE
+#   echo "Doing ambient from \"$FOLDER\""
+
+
+   . $FOLDER/defer_ssh_agent
+
+
+   AMBIENT_OUTPUT=`$FOLDER/__ambient --id-payload-listing`
+
+
+   eval $AMBIENT_OUTPUT
+
+
+   export __SYSTEM
+   export __SYSTEM_FAMILY
+   export __SYSTEM_BRANCH
+   export __SYSTEM_RELEASE
+   export __SYSTEM_SUDO_INSTALL
+   export __SYSTEM_AMBIENT_RELEASE
+   export __AMBIENT
+
+
+   if [[ $__SHELL_PRIORIY_PATH_PATCH ]]; then
+
+      PATH=$__SHELL_PRIORIY_PATH_PATCH:$PATH
+
+      export PATH
+
+   fi
+
+
+}
+
+if [[ "$0" != "$BASH_SOURCE" ]]; then
+
+#   echo "_ambient is being sourced"
+
+   SCRIPT_PATH="$BASH_SOURCE"
    
 else
 
-   echo "_ambient is being run. This is likely to be wrong. _ambient should be sourced..."
+#   echo "_ambient is being run. This is likely to be wrong. _ambient should be sourced..."
 
    SCRIPT_PATH=$0
 
@@ -22,30 +59,7 @@ fi
 SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
 
 
-. $SCRIPT_FOLDER/defer_ssh_agent
-
-
-eval `$SCRIPT_FOLDER/__ambient --id-payload-listing`
-
-
-export __SYSTEM
-export __SYSTEM_FAMILY
-export __SYSTEM_BRANCH
-export __SYSTEM_RELEASE
-export __SYSTEM_SUDO_INSTALL
-export __SYSTEM_AMBIENT_RELEASE
-export __AMBIENT
-
-
-if [[ $__SHELL_PRIORIY_PATH_PATCH ]]; then
-
-   PATH=$__SHELL_PRIORIY_PATH_PATCH:$PATH
-
-   export PATH
-
-fi
-
-
+do_ambient "$SCRIPT_FOLDER"
 
 
 
