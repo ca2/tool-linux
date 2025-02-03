@@ -16,13 +16,13 @@ else
 fi
 
 
-#echo "Script's file path is $SCRIPT_PATH"
+#echo "Script\'s file path is $SCRIPT_PATH"
 
 
 SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
 
 
-#echo "Script's folder path is $SCRIPT_FOLDER"
+#echo "__ambient\'s folder path is $SCRIPT_FOLDER"
 
 
 ARCHITECTURE=`eval uname -m`
