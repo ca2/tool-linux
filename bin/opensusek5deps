@@ -3,6 +3,11 @@
 sudo zypper install -y -t pattern devel_C_C++
 
 
-sudo zypper install -y extra-cmake-modules kcoreaddons-devel knotifications-devel kconfigwidgets-devel kio-devel kiconthemes-devel plasma-framework-devel plasma5-workspace-devel libqt5-qttools-devel libqt5-qtx11extras-devel cairo-devel freetype2-devel libidn-devel libcurl-devel libxkbcommon-devel xcb-util-devel libarchive-devel libXt-devel libXi-devel startup-notification-devel libopenssl-devel sqlite3-devel libQt5Gui-private-headers-devel xcb-util-image-devel motif-devel pango-devel dbus-1-glib-devel mpg123-devel xcb-util-wm-devel libxkbcommon-x11-devel libudev-devel alsa-devel libinput-devel ffmpeg-devel freeimage-devel libXxf86vm-devel libv4l-devel ffmpeg-devel Mesa-libGLESv3-devel assimp-devel glew-devel
+sudo zypper install -y lsb-release extra-cmake-modules kcoreaddons-devel knotifications-devel kconfigwidgets-devel kio-devel 
+kiconthemes-devel plasma-framework-devel plasma5-workspace-devel libqt5-qttools-devel libqt5-qtx11extras-devel cairo-devel 
+freetype2-devel libidn-devel libcurl-devel libxkbcommon-devel xcb-util-devel libarchive-devel libXt-devel libXi-devel 
+startup-notification-devel libopenssl-devel sqlite3-devel libQt5Gui-private-headers-devel xcb-util-image-devel motif-devel 
+pango-devel dbus-1-glib-devel mpg123-devel xcb-util-wm-devel libxkbcommon-x11-devel libudev-devel alsa-devel libinput-devel 
+ffmpeg-devel freeimage-devel libXxf86vm-devel libv4l-devel ffmpeg-devel Mesa-libGLESv3-devel assimp-devel glew-devel
 
 
