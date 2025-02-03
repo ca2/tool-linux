@@ -1,6 +1,9 @@
 #!/bin/bash
 
 
+. defer_ssh_agent
+
+
 eval `__ambient --id-payload-listing`
 
 
