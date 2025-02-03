@@ -27,9 +27,9 @@ do_ambient()
    export __AMBIENT
 
 
-   if [[ $__SHELL_PRIORIY_PATH_PATCH ]]; then
+   if [[ $__PATH_PREFIX ]]; then
 
-      PATH=$__SHELL_PRIORIY_PATH_PATCH:$PATH
+      PATH=$__PATH_PREFIX:$PATH
 
       export PATH
 
