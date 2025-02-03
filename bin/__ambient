@@ -2,8 +2,10 @@
 
 
 ARCHITECTURE=`eval uname -m`
+SCRIPT_PATH=$0
+SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
 
 
-__ambient_$ARCHITECTURE "$@"
+$SCRIPT_FOLDER/__ambient_$ARCHITECTURE "$@"
 
 

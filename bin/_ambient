@@ -1,10 +1,14 @@
 #!/bin/bash
 
 
-. defer_ssh_agent
+SCRIPT_PATH=$0
+SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
 
 
-eval `__ambient --id-payload-listing`
+. $SCRIPT_FOLDER/defer_ssh_agent
+
+
+eval `$SCRIPT_FOLDER/__ambient --id-payload-listing`
 
 
 export __SYSTEM
