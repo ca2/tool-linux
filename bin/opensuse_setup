@@ -1,0 +1,5 @@
+
+
+sudo zypper install -y zlib-devel-static glibc-devel-static
+
+
