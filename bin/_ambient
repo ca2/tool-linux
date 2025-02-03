@@ -13,4 +13,15 @@ export __SYSTEM_AMBIENT_RELEASE
 export __AMBIENT
 
 
+if [[ $__SHELL_PRIORIY_PATH_PATCH ]]; then
+
+   PATH=$__SHELL_PRIORIY_PATH_PATCH:$PATH
+
+   export PATH
+
+fi
+
+
+
+
 

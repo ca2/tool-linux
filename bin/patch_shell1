@@ -1,0 +1,133 @@
+#!/usr/bin/env bash
+
+
+patch_rc_file()
+{
+   
+   RC_FILE=$1
+
+   RC_LOG_FOLDER="${HOME}/.config/console_build_tools"
+
+   RC_LOG_FILE="${RC_LOG_FOLDER}/shell_patched_rc.txt"
+
+   if grep -q "$RC_FILE" "$RC_LOG_FILE"; then
+
+   else
+
+      mkdir -p $RC_LOG_FOLDER
+
+      echo $RC_FILE >> $RC_LOG_FILE
+
+   fi
+   
+   if [ ! -f "$RC_FILE" ]; then
+
+
+      touch $RC_FILE 
+
+
+   fi
+
+   if grep -q "# ca2 patch_shell" "$RC_FILE"; then
+
+
+      echo "\"$RC_FILE\" is already patched."
+
+   else
+
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "# ca2 patch_shell" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+#      echo "export GPG_TTY=\$(tty)" >> $RC_FILE
+#      echo "gpg-connect-agent updatestartuptty /bye >/dev/null" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "CA2_SCRIPT_DIR=\"$SCRIPT_DIR\"" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "if ! [ -x \"\$(command -v _tool_linux)\" ]; then " >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "   PATH=\$CA2_SCRIPT_DIR:\$PATH" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "fi" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "HOME_BIN_DIR=\"$HOME/bin\"" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "PATH=\$HOME_BIN_DIR:\$PATH" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "export PATH" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo ". defer_ssh_agent" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo ". _ambient" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "" >> $RC_FILE
+      echo "# end ca2 patch_shell" >> $RC_FILE
+
+      echo "Successfully patched \"$RC_FILE\""
+
+   fi
+ 
+}
+
+
+patch_profile()
+{
+   
+   patch_rc_file "$HOME/.profile"
+   
+}
+
+patch_bashrc()
+{
+   
+   patch_rc_file "$HOME/.bashrc"
+   
+}
+
+
+patch_zshrc()
+{
+   
+   patch_rc_file "$HOME/.zshrc"
+   
+}
+
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
+echo "Going to source \"$SCRIPT_DIR/_ambient\""
+. $SCRIPT_DIR/_ambient
+
+
+#if [ "$__OPERATING_SYSTEM_FAMILY" = "debian" ] || [ "$__OPERATING_SYSTEM_FAMILY" = "arch" ]; then
+
+patch_profile
+
+#elif [ "$SHELL" = "/bin/bash" ]; then
+
+patch_bashrc
+
+patch_zshrc
+
+#fi
+
+
+#if [ "$__OPERATING_SYSTEM" = "raspbian" ]; then
+
+#   patch_bashrc
+
+#fi
+
+
+
