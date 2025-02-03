@@ -1,4 +1,8 @@
 #!/bin/sh
 
 
-application_build_helper --unpatch-shell
+SCRIPT_PATH=$0
+SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
+
+
+$SCRIPT_FOLDER/application_build_helper --unpatch-shell

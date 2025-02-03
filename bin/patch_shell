@@ -1,7 +1,11 @@
 #!/bin/sh
 
 
-$HOME/cmake/operating_system/tool-linux/bin/application_build_helper --patch-shell
+SCRIPT_PATH=$0
+SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
+
+
+$SCRIPT_FOLDER/application_build_helper --patch-shell
 
 
 
