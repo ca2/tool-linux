@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 eval $(ssh-agent -s) > /dev/null
 ssh-add ~/.ssh/id_auth &> /dev/null
 #ssh-add ~/.ssh/id_sign &> /dev/null
+
 
 
