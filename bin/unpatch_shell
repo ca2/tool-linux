@@ -1,25 +1,7 @@
 #!/bin/sh
 
 
-if [[ $0 != $BASH_SOURCE ]]; then
-
-   #echo "unpatch_shell is being sourced"
-
-   SCRIPT_PATH=$BASH_SOURCE
-   
-else
-
-   #echo "unpatch_shell is being run"
-
-   SCRIPT_PATH=$0
-
-fi
+application_build_helper --unpatch-shell
 
 
-#echo "Script's file path is $SCRIPT_PATH"
 
-
-SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
-
-
-$SCRIPT_FOLDER/application_build_helper --unpatch-shell

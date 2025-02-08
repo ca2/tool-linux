@@ -1,65 +1,24 @@
-#!/usr/bin/env bash
 
-do_ambient()
-{
+. $HOME/cmake/operating_system/tool-linux/bin/defer_ssh_agent
 
-   FOLDER="$1"
+. ${HOME}/.ambient
 
+export __SYSTEM
+export __SYSTEM_FAMILY
+export __SYSTEM_BRANCH
+export __SYSTEM_RELEASE
+export __SYSTEM_SUDO_INSTALL
+export __SYSTEM_AMBIENT_RELEASE
+export __AMBIENT
 
-#   echo "Doing ambient from \"$FOLDER\""
+if [ -n "$__PATH_PREFIX" ]; then
 
+#   echo "__PATH_PREFIX is $__PATH_PREFIX"
 
-   . $FOLDER/defer_ssh_agent
+   PATH=$__PATH_PREFIX:$PATH
 
+#   echo "new PATH is $PATH"
 
-   AMBIENT_OUTPUT=`$FOLDER/__ambient --id-payload-listing`
-
-
-   eval $AMBIENT_OUTPUT
-
-
-   export __SYSTEM
-   export __SYSTEM_FAMILY
-   export __SYSTEM_BRANCH
-   export __SYSTEM_RELEASE
-   export __SYSTEM_SUDO_INSTALL
-   export __SYSTEM_AMBIENT_RELEASE
-   export __AMBIENT
-
-
-   if [[ $__PATH_PREFIX ]]; then
-
-      PATH=$__PATH_PREFIX:$PATH
-
-      export PATH
-
-   fi
-
-
-}
-
-if [[ "$0" != "$BASH_SOURCE" ]]; then
-
-#   echo "_ambient is being sourced"
-
-   SCRIPT_PATH="$BASH_SOURCE"
-   
-else
-
-#   echo "_ambient is being run. This is likely to be wrong. _ambient should be sourced..."
-
-   SCRIPT_PATH=$0
+   export PATH
 
 fi
-
-
-#echo "Script's file path is $SCRIPT_PATH"
-
-
-SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
-
-
-do_ambient "$SCRIPT_FOLDER"
-
-
-

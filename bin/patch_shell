@@ -1,28 +1,11 @@
 #!/bin/sh
 
+mkdir -p "$HOME/bin"
 
-if [[ "$0" != "$BASH_SOURCE" ]]; then
+ARCHITECTURE=`eval uname -m`
 
-   #echo "patch_shell is being sourced"
+cp $HOME/cmake/operating_system/tool-linux/bin/application_build_helper_$ARCHITECTURE $HOME/bin/application_build_helper
 
-   SCRIPT_PATH="$BASH_SOURCE"
-   
-else
+$HOME/cmake/operating_system/tool-linux/bin/__ambient_$ARCHITECTURE --id-payload-listing > $HOME/.ambient
 
-   #echo "patch_shell is being run"
-
-   SCRIPT_PATH=$0
-
-fi
-
-
-#echo "Script's file path is $SCRIPT_PATH"
-
-
-SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
-
-
-$SCRIPT_FOLDER/application_build_helper --patch-shell
-
-
-
+$HOME/bin/application_build_helper --patch-shell
