@@ -1,7 +1,7 @@
 
-. $HOME/cmake/operating_system/tool-linux/bin/defer_ssh_agent
+. $HOME/code/operating_system/tool/bin/defer_ssh_agent
 
-. ${HOME}/.ambient
+. ${HOME}/application/integration/code/.ambient
 
 export __SYSTEM
 export __SYSTEM_FAMILY

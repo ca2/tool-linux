@@ -1,11 +1,8 @@
 #!/bin/sh
 
-mkdir -p "$HOME/bin"
 
 ARCHITECTURE=`eval uname -m`
 
-cp $HOME/cmake/operating_system/tool-linux/bin/application_build_helper_$ARCHITECTURE $HOME/bin/application_build_helper
 
-$HOME/cmake/operating_system/tool-linux/bin/__ambient_$ARCHITECTURE --id-payload-listing > $HOME/.ambient
+$HOME/code/operating_system/tool/bin/application_build_helper_$ARCHITECTURE --patch-shell
 
-$HOME/bin/application_build_helper --patch-shell
