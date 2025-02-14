@@ -1,24 +1,14 @@
 
-. $HOME/code/operating_system/tool/bin/defer_ssh_agent
 
-. ${HOME}/application/integration/code/.ambient
+if [ -z "$SSH_AUTH_SOCK" ]; then
 
-export __SYSTEM
-export __SYSTEM_FAMILY
-export __SYSTEM_BRANCH
-export __SYSTEM_RELEASE
-export __SYSTEM_SUDO_INSTALL
-export __SYSTEM_AMBIENT_RELEASE
-export __AMBIENT
+   if [ -f "$HOME/.ssh/id_auth" ]; then
 
-if [ -n "$__PATH_PREFIX" ]; then
+      . $HOME/code/operating_system/tool/bin/defer_ssh_agent
 
-#   echo "__PATH_PREFIX is $__PATH_PREFIX"
-
-   PATH=$__PATH_PREFIX:$PATH
-
-#   echo "new PATH is $PATH"
-
-   export PATH
+   fi
 
 fi
+
+
+
