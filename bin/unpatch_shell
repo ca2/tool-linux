@@ -2,7 +2,7 @@
 #!/bin/sh
 
 
-application_build_helper --unpatch-shell
+$HOME/bin/application_build_helper --unpatch-shell
 
 
 
