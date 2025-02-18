@@ -1,33 +1,8 @@
 #!/usr/bin/env bash
 
 
-if [[ "$0" != "$BASH_SOURCE" ]]; then
-
-#   echo "__ambient is being sourced."
-
-   SCRIPT_PATH="$BASH_SOURCE"
-
-else
-
-#   echo "__ambient is being run."
-
-   SCRIPT_PATH="$0"
-
-fi
+application_build_helper --ambient "$@"
 
 
-#echo "Script\'s file path is $SCRIPT_PATH"
-
-
-SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
-
-
-#echo "__ambient\'s folder path is $SCRIPT_FOLDER"
-
-
-ARCHITECTURE=`eval uname -m`
-
-
-$SCRIPT_FOLDER/__ambient_$ARCHITECTURE "$@"
 
 
