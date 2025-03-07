@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+
+sudo dnf -y install gcc-c++ cmake ninja-build kf6-knotifications-devel extra-cmake-modules zlib-devel libidn-devel ncurses-devel openssl-devel cairo-devel pango-devel xcb-util-image-devel qt6-qtbase-devel qt6-qttools-devel qt6-qttools-static qt6-qtbase-private-devel qt6-qtdeclarative-devel kf6-plasma-devel xcb-util-devel xcb-util-wm-devel libxkbcommon-devel libxkbcommon-x11-devel sqlite-devel glew-devel mesa-libOSMesa-devel freeimage-devel plasma-workspace-devel kf6-kcoreaddons-devel mpg123-devel glib-devel dbus-glib-devel kf6-kiconthemes-devel kf6-kconfigwidgets-devel kf6-kio-devel alsa-lib-devel ffmpeg-devel startup-notification-devel libv4l-devel libudev-devel libarchive-devel assimp-devel libcurl-devel wayland-devel libinput-devel motif-devel
+
+sudo dnf -y groupinstall "X Software Development"
+
+
+
