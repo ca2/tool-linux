@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+sudo pacman -S cmake gcc gdb ninja pkgconf freeimage openmotif dbus-glib glew assimp
