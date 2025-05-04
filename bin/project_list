@@ -1,4 +1,4 @@
 #!/bin/bash
 
-
+application_build_helper --project-list
 
