@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+sudo apt remove vulkan-tools libvulkan-dev
+ 
+
+
+
+
+
