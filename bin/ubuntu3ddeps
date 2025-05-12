@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-sudo apt install libglm-dev glslang-dev glslang-tools vulkan-tools libvulkan-dev
+sudo apt install libglm-dev glslang-dev glslang-tools vulkan-tools libvulkan-dev libvulkan-validationlayers-dev
  
 
 # kf5-knotifications-devel extra-cmake-modules zlib-devel libidn-devel ncurses-devel openssl-devel cairo-devel pango-devel xcb-util-image-devel qt5-qtbase-devel qt5-qttools-devel qt5-qttools-static qt5-qtx11extras-devel ffmpeg-devel xcb-util-devel xcb-util-wm-devel libxkbcommon-devel libxkbcommon-x11-devel sqlite-devel glew-devel mesa-libOSMesa-devel freeimage-devel plasma-workspace-devel kf5-kcoreaddons-devel mpg123-devel
