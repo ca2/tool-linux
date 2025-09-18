@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 
-sudo pacman -S cmake gcc gdb ninja pkgconf freeimage openmotif dbus-glib glew assimp gtk4
+sudo pacman -S cmake gcc gdb ninja pkgconf openmotif dbus-glib glew assimp gtk4
