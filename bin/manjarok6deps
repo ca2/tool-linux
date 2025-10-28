@@ -2,4 +2,4 @@
 
 
 #sudo pacman -S cmake gcc gdb ninja pkgconf freeimage openmotif dbus-glib glew assimp
-sudo pacman -S cmake gcc gdb ninja pkgconf openmotif dbus-glib glew assimp extra-cmake-modules
+sudo pacman -S cmake gcc gdb ninja pkgconf openmotif dbus-glib glm glew assimp extra-cmake-modules
