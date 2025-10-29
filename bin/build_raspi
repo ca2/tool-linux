@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+
+logicalCpuCount=$([ $(uname) = 'Darwin' ] && 
+                       sysctl -n hw.logicalcpu_max || 
+                       lscpu -p | egrep -v '^#' | wc -l)
+
+#build_parallelization=$((logicalCpuCount-1))
+#build_parallelization=$((logicalCpuCount-1))
+build_parallelization=2
+
+echo "Build Parallelization $build_parallelization"
+
+ninja -j $build_parallelization "$@"
+
+#ls -la /home/camilo2
+
+# Capture the exit code of the 'mkdir' command
+exit_code=$?
+
+# Use the captured exit code in an if clause
+if [ "$exit_code" -eq 0 ]; then
+  echo "Command succeeded!"
+  paplay /home/camilo/dropbox/box/audio/sysevent/cpp_good_build.wav &
+else
+  echo "Command failed with exit code: $?"
+  paplay /home/camilo/dropbox/box/audio/sysevent/cpp_build_failed.wav &
+fi
+
+
+
+

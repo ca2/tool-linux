@@ -3,7 +3,13 @@
 # parameters
 # server:port 
 
-pactl load-module module-null-sink sink_name=remote
-pacmd set-default-sink remote
-ffmpeg -f pulse -i "remote.monitor" -ac 2 -acodec pcm_u8 -ar 48000 -f u8 "udp://$1"
+#pactl load-module module-null-sink sink_name=remote
+#pactl set-default-sink remote
+##ffmpeg -f pulse -i "remote.monitor" -ac 2 -acodec pcm_u8 -ar 48000 -f u8 "udp://$1"
+#ffmpeg -f pulse -i "remote.monitor" -ac 2 -acodec pcm_s16le -ar 48000 -f s16le udp://$1:3005
 
+
+pactl load-module module-null-sink sink_name=remote
+pactl set-default-sink remote
+pactl list short sinks
+ffmpeg -f pulse -i "remote.monitor" -acodec pcm_s16le -ar 48000 -f s16le udp://$1
