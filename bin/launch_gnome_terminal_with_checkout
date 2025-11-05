@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+
+/usr/bin/gnome-terminal -- bash -c "checkout $1; exec bash"
+
+
+
