@@ -7,26 +7,32 @@ logicalCpuCount=$([ $(uname) = 'Darwin' ] &&
 
 #build_parallelization=$((logicalCpuCount-1))
 #build_parallelization=$((logicalCpuCount-1))
+#build_parallelization=1
 build_parallelization=2
 
-echo "Build Parallelization $build_parallelization"
+while true; do
 
-ninja -j $build_parallelization "$@"
+  echo "Build Parallelization $build_parallelization"
 
-#ls -la /home/camilo2
+  ninja -j $build_parallelization "$@"
 
-# Capture the exit code of the 'mkdir' command
-exit_code=$?
+  #ls -la /home/camilo2
 
-# Use the captured exit code in an if clause
-if [ "$exit_code" -eq 0 ]; then
-  echo "Command succeeded!"
-  paplay /home/camilo/dropbox/box/audio/sysevent/cpp_good_build.wav &
-else
-  echo "Command failed with exit code: $?"
-  paplay /home/camilo/dropbox/box/audio/sysevent/cpp_build_failed.wav &
-fi
+  # Capture the exit code of the 'mkdir' command
+  exit_code=$?
 
+  # Use the captured exit code in an if clause
+  if [ "$exit_code" -eq 0 ]; then
+    echo "Command succeeded!"
+    paplay /home/camilo/dropbox/box/audio/sysevent/cpp_good_build.wav &
+    break
+  else
+    echo "Command failed with exit code: $?"
+    paplay /home/camilo/dropbox/box/audio/element/addmach.wav &
+    sleep 1
+  fi
 
+  date +"%Y-%m-%d %H:%M:%S"
 
+done
 
