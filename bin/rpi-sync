@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rsync -avz --progress camilo@raspi.camilothomas.com:"/usr" ~/raspi-sysroot
+rsync -avz --progress camilo@raspi.camilothomas.com:"/lib" ~/raspi-sysroot
