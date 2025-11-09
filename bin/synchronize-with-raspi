@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+rsync -av "$1" raspi.camilothomas.com:"$2"
+
+
+
