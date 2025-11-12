@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+rsync -av raspi.camilothomas.com:/usr $HOME/raspi_sysroot
+rsync -av raspi.camilothomas.com:/lib $HOME/raspi_sysroot

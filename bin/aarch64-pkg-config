@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CMAKE_SYSROOT=$HOME/raspi-sysroot
+
+PKG_CONFIG_SYSROOT_DIR=$CMAKE_SYSROOT
+
+export PKG_CONFIG_SYSROOT_DIR
+
+PKG_CONFIG_PATH=$CMAKE_SYSROOT/usr/lib/aarch64-linux-gnu/pkgconfig:$CMAKE_SYSROOT/usr/share/pkgconfig
+
+export PKG_CONFIG_PATH
+
+/usr/bin/pkg-config "$@"
+
+
+
