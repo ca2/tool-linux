@@ -11,9 +11,11 @@ if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
 
 elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
 
-echo "XFCE"
-
 /usr/bin/xfce4-terminal -- bash -c "$HOME/code/operating_system/tool/bin/application_build_helper --git-checkout; exec bash"
+
+elif [[ "$XDG_CURRENT_DESKTOP" == *"$LXQt"* ]]; then
+
+/usr/bin/qterminal -- bash -c "$HOME/code/operating_system/tool/bin/application_build_helper --git-checkout; exec bash"
 
 else
 
