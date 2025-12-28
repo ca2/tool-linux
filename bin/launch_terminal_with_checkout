@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+
+if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
+
+/usr/bin/konsole -- bash -c "checkout $1; exec bash"
+
+else
+
+/usr/bin/gnome-terminal -- bash -c "checkout $1; exec bash"
+
+fi
+

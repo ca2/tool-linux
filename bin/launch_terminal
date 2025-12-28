@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+
+/usr/bin/gnome-terminal -- bash -c "cd $1; exec bash"
+
+
+
