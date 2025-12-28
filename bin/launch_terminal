@@ -12,7 +12,7 @@ if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
 
 elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
 
-/usr/bin/xfce4-terminal -- bash -c "exec bash"
+/usr/bin/xfce4-terminal  -e "bash -lc 'exec bash'"
 
 elif [[ "$XDG_CURRENT_DESKTOP" == *"$LXQt"* ]]; then
 
