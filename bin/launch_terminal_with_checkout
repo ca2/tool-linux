@@ -3,15 +3,15 @@
 
 if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
 
-/usr/bin/konsole -- bash -c "checkout $1; exec bash"
+/usr/bin/konsole -- bash -c "cd $1; checkout; exec bash"
 
 elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
 
-/usr/bin/xfce4-terminal -- bash -c "checkout $1; exec bash"
+/usr/bin/xfce4-terminal -- bash -c "cd $1; checkout; exec bash"
 
 else
 
-/usr/bin/gnome-terminal -- bash -c "checkout $1; exec bash"
+/usr/bin/gnome-terminal -- bash -c "cd $1; checkout; exec bash"
 
 fi
 
