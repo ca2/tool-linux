@@ -1,7 +1,20 @@
 #!/usr/bin/bash
 
 
+
+if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
+
+/usr/bin/konsole -- bash -c "cd $1; exec bash"
+
+elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
+
+/usr/bin/xfce4-terminal -- bash -c "cd $1; exec bash"
+
+else
+
 /usr/bin/gnome-terminal -- bash -c "cd $1; exec bash"
+
+fi
 
 
 
