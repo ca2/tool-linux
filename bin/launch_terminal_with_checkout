@@ -1,17 +1,27 @@
 #!/usr/bin/bash
 
+launch()
+{
+
+cd $1
 
 if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
 
-/usr/bin/konsole -- bash -c "cd $1; checkout; exec bash"
+/usr/bin/konsole -- bash -c "$HOME/code/operating_system/tool/bin/application_build_helper --git-checkout; exec bash"
 
 elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
 
-/usr/bin/xfce4-terminal -- bash -c "cd $1; checkout; exec bash"
+echo "XFCE"
+
+/usr/bin/xfce4-terminal -- bash -c "$HOME/code/operating_system/tool/bin/application_build_helper --git-checkout; exec bash"
 
 else
 
-/usr/bin/gnome-terminal -- bash -c "cd $1; checkout; exec bash"
+/usr/bin/gnome-terminal -- bash -c "$HOME/code/operating_system/tool/bin/application_build_helper --git-checkout; exec bash"
 
 fi
+
+}
+
+launch $1
 
