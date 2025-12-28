@@ -1,123 +1,125 @@
 #!/bin/bash
+
+application_build_helper --git-checkout "$@"
  
-if [ -z "$1" ]; then
+# if [ -z "$1" ]; then
  
-        if [ -d .git ]; then
+#         if [ -d .git ]; then
  
-                BASEDIR=$(pwd)
+#                 BASEDIR=$(pwd)
  
-                DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
+#                 DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
                
-        else
+#         else
  
-                if [ -f $HOME/current_working_directory.txt ]; then
+#                 if [ -f $HOME/current_working_directory.txt ]; then
  
-                        BASEDIR=`cat $HOME/current_working_directory.txt`
+#                         BASEDIR=`cat $HOME/current_working_directory.txt`
  
-                        BASEDIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${BASEDIR}")
+#                         BASEDIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${BASEDIR}")
  
-                        BASEDIR=$(sed -e 's/^\([A-Z]\)[:]/\/\1/'<<<"${BASEDIR}")
+#                         BASEDIR=$(sed -e 's/^\([A-Z]\)[:]/\/\1/'<<<"${BASEDIR}")
  
-                        BASEDIR=$(sed -e 's/\\/\//'<<<"${BASEDIR}")
+#                         BASEDIR=$(sed -e 's/\\/\//'<<<"${BASEDIR}")
  
-                fi
+#                 fi
  
-                if [ -z "$BASEDIR" ]; then
+#                 if [ -z "$BASEDIR" ]; then
  
-                        echo "Please run command:"
-                        echo ""
-                        echo "   set_working_directory <WORKING_DIRECTORY_PATH>"
-                        echo ""
-                        echo "to set the base folder path."
-                        echo ""
-                        echo "You can also run this command from a git repository folder."
+#                         echo "Please run command:"
+#                         echo ""
+#                         echo "   set_working_directory <WORKING_DIRECTORY_PATH>"
+#                         echo ""
+#                         echo "to set the base folder path."
+#                         echo ""
+#                         echo "You can also run this command from a git repository folder."
  
-                        exit 0
+#                         exit 0
  
-                fi
+#                 fi
  
-        fi
+#         fi
  
-else
+# else
  
-        BASEDIR=$1
+#         BASEDIR=$1
  
-fi
+# fi
  
-path_pattern="path = *"
+# path_pattern="path = *"
  
-pushd () {
-    command pushd "$@" > /dev/null
-}
+# pushd () {
+#     command pushd "$@" > /dev/null
+# }
  
-popd () {
-    command popd "$@" > /dev/null
-}
+# popd () {
+#     command popd "$@" > /dev/null
+# }
  
  
-submodule()
-{
+# submodule()
+# {
  
-        if [ -d "$1" ]; then
+#         if [ -d "$1" ]; then
  
-                pushd $1
+#                 pushd $1
  
-                DIR=$(pwd)
+#                 DIR=$(pwd)
  
-                DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
+#                 DIR=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${DIR}")
  
-                echo "Processing $DIR..."
+#                 echo "Processing $DIR..."
  
-                git fetch
+#                 git fetch
 
 				
-                LIST_MAIN_BRANCH=$(git branch --list main)
+#                 LIST_MAIN_BRANCH=$(git branch --list main)
 
-                if [ -n "$LIST_MAIN_BRANCH" ]; then
+#                 if [ -n "$LIST_MAIN_BRANCH" ]; then
 
-                    git checkout main
+#                     git checkout main
 
-                else
+#                 else
 
-                    git checkout master
+#                     git checkout master
 
-                fi
+#                 fi
 
-                git pull
+#                 git pull
  
-                if [ -n "$LIST_MAIN_BRANCH" ]; then
+#                 if [ -n "$LIST_MAIN_BRANCH" ]; then
 
-                        if [ -f .gitmodules ]; then
+#                         if [ -f .gitmodules ]; then
         
-                                while read line; do
+#                                 while read line; do
         
-                                        trimmed_line=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${line}")
+#                                         trimmed_line=$(sed -e 's/^[[:space:]]*//' -e 's/[[:space:]\\/]*$//'<<<"${line}")
         
-                                        if [[ $trimmed_line == $path_pattern ]]; then
+#                                         if [[ $trimmed_line == $path_pattern ]]; then
         
-                                                submodule_name=$(sed -e 's/^path\s*=\s*//'<<<"${line}")
+#                                                 submodule_name=$(sed -e 's/^path\s*=\s*//'<<<"${line}")
         
-                                                submodule ./$submodule_name
+#                                                 submodule ./$submodule_name
         
-                                        fi
+#                                         fi
         
-                                done < ./.gitmodules
+#                                 done < ./.gitmodules
         
-                        fi
+#                         fi
 
-                fi
+#                 fi
  
-                popd
+#                 popd
  
-        fi
+#         fi
  
-}
+# }
  
  
-submodule $BASEDIR
-# localtime="$(date +"%Y-%m-%d %H:%M:%S %:z") ($(timedatectl show -p Timezone --value))"
-localtime="$(date +"%Y-%m-%d %H:%M:%S")"
+# submodule $BASEDIR
+# # localtime="$(date +"%Y-%m-%d %H:%M:%S %:z") ($(timedatectl show -p Timezone --value))"
+# localtime="$(date +"%Y-%m-%d %H:%M:%S")"
  
-echo "checkout $localtime" 
+# echo "checkout $localtime" 
  
 
