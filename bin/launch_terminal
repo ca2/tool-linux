@@ -1,7 +1,33 @@
 #!/usr/bin/bash
 
+launch()
+{
 
-/usr/bin/gnome-terminal -- bash -c "cd $1; exec bash"
+cd $1
 
+
+if [[ "$XDG_CURRENT_DESKTOP" == "KDE" ]]; then
+
+/usr/bin/konsole -e bash -c "exec bash"
+
+elif [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
+
+/usr/bin/xfce4-terminal  -e "bash -lc 'exec bash'"
+
+elif [[ "$XDG_CURRENT_DESKTOP" == *"$LXQt"* ]]; then
+
+/usr/bin/qterminal -e bash -c "exec bash"
+
+else
+
+/usr/bin/gnome-terminal -- bash -c "exec bash"
+
+fi
+
+
+}
+
+
+launch $1
 
 
