@@ -4,7 +4,7 @@
 sudo apt -y install gnome-terminal cmake ninja-build build-essential pkg-config libcairo2-dev zlib1g-dev libfreeimage-dev libidn11-dev libncurses-dev libpango1.0-dev libssl-dev libxcb-util-dev libxkbcommon-x11-dev libmpg123-dev libxkbcommon-dev libglm-dev libglew-dev libsqlite3-dev libxkbcommon-x11-dev libosmesa6-dev libxcb-image0-dev libavcodec-dev libasound2-dev libglib2.0-dev libdbus-glib-1-dev libx11-xcb-dev libxcb-icccm4-dev libxcb-xinput-dev libbz2-dev libavformat-dev libswscale-dev libgtk-4-dev libappindicator3-dev libxxf86vm-dev libxcb-randr0-dev libswresample-dev libv4l-dev libudev-dev libstartup-notification0-dev libarchive-dev libassimp-dev libfreetype-dev libunac1-dev libcurl4-openssl-dev libinput-dev libxt-dev libmotif-dev
 
 
-# Ubuntu 23.04
+# Ubuntu 23.04z
 # sudo apt -y install cmake ninja-build build-essential pkg-config libcairo2-dev zlib1g-dev libfreeimage-dev libidn11-dev libncurses-dev libpango1.0-dev libssl-dev libxcb-util-dev libxkbcommon-x11-dev libmpg123-dev libxkbcommon-dev libglew-dev libsqlite3-dev libxkbcommon-x11-dev libosmesa6-dev libxcb-image0-dev libavcodec-dev libasound2-dev libglib2.0-dev libdbus-glib-1-dev libx11-xcb-dev libxcb-icccm4-dev libxcb-xinput-dev libbz2-dev libavformat-dev libswscale-dev libgtk-3-dev libayatana-appindicator3-dev libxxf86vm-dev libxcb-randr0-dev libswresample-dev libgconf2-dev libv4l-dev libudev-dev libstartup-notification0-dev libarchive-dev libassimp-dev libfreetype-dev libunac1-dev libcurl4-openssl-dev libinput-dev
 
 
