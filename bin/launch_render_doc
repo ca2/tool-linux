@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+export LD_LIBRARY_PATH=$HOME/SceneFoundry/main/cmake-build-debug/output/:$LD_LIBRARY_PATH
+
+
+
+/opt/renderdoc_1.42/bin/qrenderdoc $@
+
+
+
