@@ -1,5 +1,5 @@
 
 
-sudo zypper install -y zip zlib-devel-static glibc-devel-static zip
+sudo zypper install -y zip zlib-devel-static glibc-devel-static zip lsb-release
 
 
