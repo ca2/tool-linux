@@ -1,0 +1,57 @@
+
+. ____debug
+
+# Load os-release variables
+. /etc/os-release
+
+# Get distro ID and convert to lowercase
+distro="${ID,,}"
+
+# Read VERSION_ID from /etc/os-release
+release_id=$VERSION_ID
+
+# Split into major and minor
+release_major=${release_id%%.*}  # "24"
+release_minor=${release_id##*.}  # "04"
+
+debug "release_major is $release_major"
+debug "release_minor is $release_minor"
+
+release_number=$((10#$release_major * 100 + 10#$release_minor))
+
+debug "release_id is $release_id"
+debug "release_number is $release_number"
+
+debug "distro is $distro"
+
+
+case "$distro" in
+    *ubuntu*)
+        debug "Ubuntu detected"
+        ;;
+    *fedora*)
+        debug "Fedora detected"
+        ;;
+    *opensuse*)
+        debug "openSUSE detected"
+        ;;
+    *debian*)
+        debug "Debian detected"
+        ;;
+    *manjaro*)
+        debug "Manjaro detected"
+        ;;
+    *)
+    debug "Unknown distro: $distro"
+    ;;
+esac
+
+
+
+if (( release_number >= 2404 && release_number < 2510 )); then
+    debug "release_number >= 2404 && release_number < 2510"
+else
+    debug "release_number < 2404 || release_number >= 2510"
+fi
+
+

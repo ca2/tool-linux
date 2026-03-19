@@ -1,0 +1,57 @@
+
+
+. ____debug
+
+
+current_desktop="${XDG_CURRENT_DESKTOP:-$DESKTOP_SESSION}"
+current_desktop="${current_desktop,,}"
+
+
+debug "current_desktop is $current_desktop"
+
+case "$current_desktop" in
+    *gnome*)
+        debug "GNOME detected"
+        current_desktop="gnome"
+        ;;
+    *kde*|*plasma*)
+        debug "KDE detected"
+        current_desktop="kde"
+        ;;
+    *xfce*)
+        debug "XFCE detected"
+        current_desktop="xfce"
+        ;;
+    *lxde*)
+        debug "LXDE detected"
+        current_desktop="lxde"
+        ;;
+    *lxqt*)
+        debug "LXQt detected"
+        current_desktop="lxqt"
+        ;;
+    *)
+    debug "Unknown desktop: $current_desktop"
+    current_desktop="current"
+    ;;
+esac
+
+debug "filtered current_desktop is $current_desktop"
+
+# case "$desktop" in
+#     *gnome*)
+#         echo "GNOME detected"
+#         ;;
+#     *kde*|*plasma*)
+#         echo "KDE detected"
+#         ;;
+#     *xfce*)
+#         echo "XFCE detected"
+#         ;;
+#     *lxde*|*lxqt*)
+#         echo "LXDE/LXQt detected"
+#         ;;
+#     *)
+#         echo "Unknown desktop: $desktop"
+#         ;;
+# esac

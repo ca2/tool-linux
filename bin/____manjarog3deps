@@ -1,0 +1,3 @@
+
+#sudo pacman -S cmake gcc gdb ninja pkgconf freeimage openmotif dbus-glib glew assimp gtk3
+packages="cmake gcc gdb ninja pkgconf openmotif dbus-glib glew assimp gtk3"

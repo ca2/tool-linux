@@ -1,0 +1,8 @@
+
+
+
+sudo_install="sudo apt -y install"
+sudo_group_install="sudo apt -y install"
+
+
+

@@ -1,0 +1,8 @@
+
+
+
+sudo_install="sudo zypper install -y"
+sudo_group_install="sudo zypper install -y -t pattern"
+
+
+

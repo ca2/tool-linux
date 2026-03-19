@@ -1,0 +1,58 @@
+
+
+. ____debug
+
+. ____operating_system
+
+. ____current_desktop
+
+. ____distro_setup_${distro}
+
+
+debug "Running __install_deps_for_distro for distro : ${distro}"
+
+
+case "$current_desktop" in
+   *gnome*)
+      . ____${distro}g4deps
+      ;;
+   *kde*)
+      . ____${distro}k6deps
+      ;;
+   *xfce*)
+      . ____${distro}g3deps
+        ;;
+   *lxde*)
+      debug "Todo desktop: ${distro} $current_desktop"
+        ;;
+   *lxqt*)
+      . ____${distro}lxq2deps
+      ;;
+   *)
+   debug "Unknown desktop: $current_desktop"
+   ;;
+esac
+
+
+if [[ -n "$packages" ]]; then
+
+   cmd="$sudo_install $packages"
+
+   echo $cmd
+   
+   $cmd
+
+fi
+
+if [[ -n "$install_groups" ]]; then
+
+   cmd="$sudo_group_install $install_groups"
+
+   echo $cmd
+   
+   $cmd
+
+fi
+
+
+

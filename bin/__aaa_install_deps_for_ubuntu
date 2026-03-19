@@ -1,0 +1,41 @@
+#!/bin/bash
+
+. ____debug
+
+. ____operating_system
+
+. ____current_desktop
+
+
+debug "Running __ubuntu_deps"
+
+
+case "$current_desktop" in
+   *gnome*)
+      . ____ubuntug4deps
+      ;;
+   *kde*)
+      . ____ubuntuk6deps
+      ;;
+   *xfce*)
+      . ____ubuntug3deps
+        ;;
+   *lxde*)
+      debug "Todo desktop: $current_desktop"
+        ;;
+   *lxqt*)
+      . ____ubuntul2deps
+      ;;
+   *)
+   debug "Unknown desktop: $current_desktop"
+   ;;
+esac
+
+cmd="sudo apt -y install $packages"
+
+echo $cmd
+$cmd
+
+
+
+

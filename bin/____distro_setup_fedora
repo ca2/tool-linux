@@ -1,0 +1,8 @@
+
+
+
+sudo_install="sudo dnf -y install --allowerasing"
+sudo_group_install="sudo dnf -y groupinstall"
+
+
+

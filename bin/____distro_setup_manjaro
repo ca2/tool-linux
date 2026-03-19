@@ -1,0 +1,8 @@
+
+
+
+sudo_install="sudo pacman -S"
+sudo_group_install="sudo pacman -S"
+
+
+
