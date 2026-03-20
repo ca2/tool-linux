@@ -28,18 +28,35 @@ debug "distro is $distro"
 case "$distro" in
     *ubuntu*)
         debug "Ubuntu detected"
+sudo_install="sudo apt -y install"
+sudo_group_install="sudo apt -y install"
+sudo_packages_update="sudo apt update"
         ;;
     *fedora*)
         debug "Fedora detected"
+
+sudo_install="sudo dnf -y install --allowerasing"
+sudo_group_install="sudo dnf -y groupinstall"
+sudo_packages_update="sudo dnf update"
         ;;
     *opensuse*)
         debug "openSUSE detected"
+
+sudo_install="sudo zypper install -y"
+sudo_group_install="sudo zypper install -y -t pattern"
+sudo_packages_update="sudo zypper update"
         ;;
     *debian*)
         debug "Debian detected"
+sudo_install="sudo apt -y install"
+sudo_group_install="sudo apt -y install"
+sudo_packages_update="sudo apt update"
         ;;
     *manjaro*)
         debug "Manjaro detected"
+sudo_install="sudo pacman -S"
+sudo_group_install="sudo pacman -S"
+sudo_packages_update="sudo pacman -Syu"
         ;;
     *)
     debug "Unknown distro: $distro"
