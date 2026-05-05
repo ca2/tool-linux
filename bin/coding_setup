@@ -28,3 +28,4 @@ SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
 $SCRIPT_FOLDER/coding_setup_$ARCHITECTURE "$@"
 
 
+
