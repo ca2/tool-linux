@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+ARCHITECTURE=`eval uname -m`
+
+
+if [[ $0 != $BASH_SOURCE ]]; then
+
+   #echo "application_build_helper is being sourced"
+
+   SCRIPT_PATH=$BASH_SOURCE
+   
+else
+
+   #echo "application_build_helper is being run. This is likely to be wrong. _ambient should be sourced..."
+
+   SCRIPT_PATH=$0
+
+fi
+
+
+#echo "Script's file path is $SCRIPT_PATH"
+
+
+SCRIPT_FOLDER=$(dirname "$SCRIPT_PATH")
+
+
+$SCRIPT_FOLDER/coding_setup_$ARCHITECTURE "$@"
+
+
