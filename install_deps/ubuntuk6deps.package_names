@@ -43,3 +43,4 @@ libkf6configwidgets-dev
 libkf6kio-dev
 libkf6iconthemes-dev
 librsvg2-dev
+libv4l-dev
