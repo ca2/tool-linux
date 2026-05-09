@@ -38,7 +38,6 @@ motif-devel
 glibc-static
 libstdc++-static
 libappindicator-gtk3-devel
-xorg-x11-server-devels
 libXrandr-devel
 libXi-devel
 libXext-devel
