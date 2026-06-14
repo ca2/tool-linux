@@ -1,7 +1,7 @@
 
 if [ -z "$__SYSTEM" ]; then
 
-   . $HOME/application/integration/code/.ambient
+   . $HOME/application/integration/code/.operating_system_summary
 
    # envbasename=`basename $SHELL`
 
