@@ -1,0 +1,10 @@
+cmake
+gcc
+gdb
+ninja
+pkgconf
+openmotif
+dbus-glib
+glew
+assimp
+gtk4
